@@ -626,9 +626,9 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
       key=d.getDate()+'-'+(d.getMonth()+1);
   document.getElementById('gmMsg').textContent=S[key]||M[doy%M.length];
   document.getElementById('gmDate').textContent=w+' · '+p2(d.getDate())+'/'+p2(d.getMonth()+1);
-  var hr=d.getHours(),night=!(hr>=6&&hr<17),reduceM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var hr=d.getHours(),night=!(hr>=6&&hr<18),reduceM=matchMedia('(prefers-reduced-motion:reduce)').matches;
   gm.classList.add(night?'night':'day');
-  var per=hr>=6&&hr<11?'sang':hr>=11&&hr<13?'trua':hr>=13&&hr<17?'chieu':hr>=17&&hr<22?'toi':'khuya',
+  var per=hr>=5&&hr<11?'sang':hr>=11&&hr<13?'trua':hr>=13&&hr<18?'chieu':hr>=18&&hr<22?'toi':'khuya',
       TAG={sang:'good morning, bé iu ♡',trua:'trưa rồi, bé iu ăn cơm chưa ♡',chieu:'good afternoon, bé iu ♡',toi:'good evening, bé iu ♡',khuya:'good night, bé iu ♡'},
       HD={sang:'Chào ngày mới,',trua:'Chào buổi trưa,',chieu:'Chào buổi chiều,',toi:'Chào buổi tối,',khuya:'Khuya rồi,'};
   document.getElementById('gmTag').textContent=TAG[per];
