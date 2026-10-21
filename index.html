@@ -218,7 +218,7 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
 #gm.night .gm-h{background:linear-gradient(120deg,#ffc2dc,#d9b4ff 55%,#a9c4ff);-webkit-background-clip:text;background-clip:text;color:transparent}
 #gm.night .gm-p{color:#f0e6ff}
 #gm.night .gm-sign{color:#cdb2ee}
-.moon{position:absolute;top:9%;right:11%;width:min(88px,22vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fffdf0,#fff3c8 55%,#f3e0a0);box-shadow:0 0 40px 14px rgba(255,240,190,.35),0 0 120px 40px rgba(180,170,255,.2);animation:mg 5s ease-in-out infinite alternate}
+.moon{position:absolute;top:clamp(118px,17%,210px);right:9%;width:min(88px,22vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fffdf0,#fff3c8 55%,#f3e0a0);box-shadow:0 0 40px 14px rgba(255,240,190,.35),0 0 120px 40px rgba(180,170,255,.2);animation:mg 5s ease-in-out infinite alternate}
 .moon::before{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 62% 30%,rgba(205,185,120,.45) 0 9%,transparent 10%),radial-gradient(circle at 30% 62%,rgba(205,185,120,.35) 0 12%,transparent 13%),radial-gradient(circle at 70% 70%,rgba(205,185,120,.3) 0 7%,transparent 8%)}
 @keyframes mg{to{box-shadow:0 0 52px 18px rgba(255,240,190,.45),0 0 140px 50px rgba(180,170,255,.25)}}
 #nstars i{position:absolute;border-radius:50%;background:#fff;opacity:0;box-shadow:0 0 6px rgba(255,255,255,.9);animation:tw 3s ease-in-out infinite}
@@ -226,6 +226,20 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
 #meteors i::after{content:'';position:absolute;left:-2px;top:-2px;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px rgba(190,210,255,.9)}
 @keyframes mt{0%{opacity:0;transform:translate(0,0) rotate(-35deg)}10%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(-35deg)}}
 @media (prefers-reduced-motion:reduce){.sf,.sf .hd,.sf .lf,.wp,.moon,#nstars i{animation:none}#nstars i{opacity:.8}#meteors{display:none}}
+#gm{flex-direction:column;align-items:center}
+.gm-top{position:relative;text-align:center;margin:4px 0 14px;animation:fu .9s .2s ease-out both}
+.gm-clock{font:300 clamp(2.4rem,11vw,3.2rem)/1 system-ui,sans-serif;letter-spacing:.05em;font-variant-numeric:tabular-nums;color:#a3197a;text-shadow:0 2px 14px rgba(255,255,255,.7)}
+.cl-c{animation:clb 1s steps(2) infinite}
+@keyframes clb{50%{opacity:.25}}
+.gm-love{margin-top:8px;color:#9c2f72;font:600 .85rem system-ui,sans-serif;letter-spacing:.02em}
+.gm-count{margin-top:3px;color:#d1306f;font:700 1rem/1.3 system-ui,sans-serif;font-variant-numeric:tabular-nums}
+#gm.night .gm-clock{color:#fff;text-shadow:0 0 18px rgba(190,170,255,.7)}
+#gm.night .gm-love{color:#e8d4ff}
+#gm.night .gm-count{color:#ffc2dc}
+@media (max-height:640px){.gm-clock{font-size:2.1rem}.gm-top{margin:0 0 10px}.gm-love{margin-top:5px}}
+@media (prefers-reduced-motion:reduce){.cl-c,.gm-top{animation:none}}
+#gm .gm-h{font-size:clamp(2.1rem,9.4vw,3rem)}
+@media (max-width:360px){.gm-count{font-size:.9rem}}
 </style>
 </head>
 <body class="ld">
@@ -237,6 +251,7 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
   <div class="gstars" id="gstars" aria-hidden="true"></div>
   <div class="sun" aria-hidden="true"></div>
   <div class="gday" id="gday" aria-hidden="true"></div><div class="gnight" aria-hidden="true"><div class="moon"></div><div id="nstars"></div><div id="meteors"></div></div></div>
+  <div class="gm-top"><div class="gm-clock" id="gmClock" aria-label="Giờ hiện tại">--:--</div><div class="gm-love">Chúng mình đã yêu nhau được</div><div class="gm-count" id="gmCount">&nbsp;</div></div>
   <div class="gm-in">
     <div><span class="gm-chip" id="gmDate">Hôm nay</span></div>
     <div class="gm-tag" id="gmTag">good morning, bé iu ♡</div>
@@ -613,11 +628,13 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
   document.getElementById('gmDate').textContent=w+' · '+p2(d.getDate())+'/'+p2(d.getMonth()+1);
   var hr=d.getHours(),night=!(hr>=6&&hr<17),reduceM=matchMedia('(prefers-reduced-motion:reduce)').matches;
   gm.classList.add(night?'night':'day');
+  var per=hr>=6&&hr<11?'sang':hr>=11&&hr<13?'trua':hr>=13&&hr<17?'chieu':hr>=17&&hr<22?'toi':'khuya',
+      TAG={sang:'good morning, bé iu ♡',trua:'trưa rồi, bé iu ăn cơm chưa ♡',chieu:'good afternoon, bé iu ♡',toi:'good evening, bé iu ♡',khuya:'good night, bé iu ♡'},
+      HD={sang:'Chào ngày mới,',trua:'Chào buổi trưa,',chieu:'Chào buổi chiều,',toi:'Chào buổi tối,',khuya:'Khuya rồi,'};
+  document.getElementById('gmTag').textContent=TAG[per];
+  document.getElementById('gmH').innerHTML=HD[per]+'<span>em bé ơi</span>';
   if(night){
     var MN=['Hôm nay em đã vất vả rồi. Giờ thì nghỉ ngơi đi nha, anh ở đây với em.','Ngủ ngon nha em bé, mơ thấy anh một chút cũng được.','Dù hôm nay thế nào, em vẫn là điều đẹp nhất trong ngày của anh.','Đặt điện thoại xuống rồi đi ngủ thôi em bé. Anh thương em, ngủ ngon nha.','Mong những giấc mơ đêm nay thật dịu dàng với em.','Gửi em một cái ôm thật chặt trước khi em đi ngủ nhé.','Nếu hôm nay có chuyện buồn, cứ để lại cho đêm nay, sáng mai anh cùng em đối mặt.','Trăng sáng quá nên anh nhớ em, em ngủ ngon nha.','Cảm ơn em vì hôm nay đã cố gắng. Anh tự hào về em lắm.','Chúc em một đêm thật bình yên, và một ngày mai thật nhẹ nhàng.','Em bé nhớ đắp chăn kỹ vào nha, kẻo lạnh anh lo.','Ngoài kia có hàng nghìn vì sao, nhưng anh chỉ muốn nhìn em thôi.','Đêm nay anh thầm ước cho em bình an, vui vẻ và luôn được yêu thương.','Mệt thì nghỉ, buồn thì kể, vì em có anh ở đây mà.','Hôm nay kết thúc rồi. Ngày mai lại là một cơ hội mới để mình thương nhau thêm.','Ngủ sớm một chút nha em bé, để mai anh còn được thấy em cười.','Mong em ngủ thật ngon, vì em xứng đáng được nghỉ ngơi.','Nhắm mắt lại và nhớ rằng có một người luôn nghĩ về em trước khi ngủ.','Chúc em một giấc ngủ không lo âu, chỉ có sao và trăng.','Dù mình ở xa hay gần, tim anh vẫn ở bên em mỗi đêm.','Em bé hôm nay giỏi lắm rồi. Giờ thì thư giãn thôi nha.','Anh gửi em một ngôi sao, giữ nó bên cạnh khi em ngủ nhé.','Nếu đêm nay em thấy trống trải, hãy nhớ có anh đang nhớ em đây.','Cảm ơn em đã ở bên anh thêm một ngày nữa. Ngủ ngon nha em bé.','Ngày mai dù có chuyện gì, mình vẫn cùng nhau đi tiếp em nhé.','Chúc em mơ thấy những điều đẹp nhất, và có anh ở trong đó.','Đêm yên tĩnh thế này, anh chỉ muốn nói là anh thương em nhiều lắm.','Em bé đừng thức khuya quá nha, sức khỏe của em quan trọng hơn mọi thứ.','Mong ánh trăng đêm nay thay anh canh giấc ngủ cho em.','Mọi lo lắng hôm nay cứ để đó, còn bây giờ chỉ cần ngủ thật ngon thôi.','Hẹn gặp em ở một ngày mới thật đẹp. Ngủ ngon, em bé của anh.'];
-    document.getElementById('gmMsg').textContent=S[key]||MN[doy%MN.length];
-    document.getElementById('gmTag').textContent='good night, bé iu ♡';
-    document.getElementById('gmH').innerHTML=(hr>=22||hr<6?'Khuya rồi,':'Chào buổi tối,')+'<span>em bé ơi</span>';
     var ns=document.getElementById('nstars');
     for(var q=0;q<70;q++){var sr=document.createElement('i'),z=Math.random();
       sr.style.left=Math.random()*100+'%';sr.style.top=Math.random()*85+'%';
@@ -650,10 +667,10 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
         +'<g class="lf r"><path d="M50 164C72 158 86 142 90 128C70 130 54 142 50 164Z" fill="#43a047"/></g>'
         +'<g class="hd">'+pb+pf+'<circle cx="50" cy="62" r="17" fill="#7a4a1e"/><circle cx="50" cy="62" r="12.5" fill="#5a3213"/>'+sd+'</g></svg>';
     };
-    var base=Math.min(260,innerHeight*.3),spec=[[4,.8],[22,1],[48,.7],[73,1.05],[94,.85]];
+    var base=Math.min(260,innerHeight*.27),spec=[[4,.8],[22,1],[48,.7],[73,1.05],[94,.85]];
     spec.forEach(function(s,i){
       var f=document.createElement('div'),hh=base*s[1],ww=hh*100/240;
-      f.className='sf';f.style.height=hh+'px';f.style.width=ww+'px';f.style.left=s[0]+'%';f.style.marginLeft=(-ww/2)+'px';
+      f.className='sf';f.style.height=hh+'px';f.style.width=ww+'px';f.style.left=s[0]+'%';f.style.marginLeft=(-ww/2)+'px';f.style.bottom=(-hh*.22)+'px';
       f.style.animationDelay=(-i*.8)+'s';f.innerHTML=sfSVG();gd.appendChild(f);
     });
     if(!reduceM){
@@ -661,6 +678,16 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
         wp.style.animationDuration=(10+Math.random()*8).toFixed(1)+'s';wp.style.animationDelay=(-Math.random()*14).toFixed(1)+'s';gd.appendChild(wp)}
     }
   }
+  var MA=['Giữa ngày rồi, em bé nhớ uống nước và nghỉ một chút nha.','Chiều nay mà thấy mệt, cứ nhắn anh một câu thôi cũng được.','Em bé cố lên nha, nửa ngày nữa là xong rồi, anh đang cổ vũ em.','Anh vừa nghĩ đến em và tự nhiên thấy buổi chiều dễ chịu hơn hẳn.','Nhớ ăn uống đầy đủ nha em bé, đừng để bụng đói mà làm việc.','Nắng chiều đẹp thật, nhưng chưa đẹp bằng lúc em cười.','Gửi em một chút năng lượng để em đi hết buổi chiều thật nhẹ nhàng.','Nếu hôm nay có chuyện làm em phiền lòng, cứ kể anh nghe nhé.','Em làm việc chăm chỉ lắm rồi, nghỉ vài phút rồi đi tiếp nha.','Chiều rồi, em bé nhớ vươn vai một cái cho đỡ mỏi nhé.','Dù bận đến đâu, em cũng là điều anh nghĩ đến đầu tiên.','Anh thương em nhiều hơn cả nắng chiều thương hoàng hôn.','Em bé đừng quên uống nước nha, anh nhắc em nè.','Hôm nay em đã làm được nhiều việc rồi, anh tự hào về em lắm.','Mong buổi chiều của em thật bình yên và nhiều điều vui.','Chỉ cần nghĩ đến em thôi là anh lại thấy mình có thêm sức mạnh.','Em mệt thì cứ dựa vào anh, anh ở đây mà.','Cả buổi chiều nay anh nhớ em, không biết em có nhớ anh không nè.','Có chuyện gì không vui thì để đó, lát nữa mình cùng nhau giải quyết.','Em bé giỏi lắm. Cố thêm chút nữa là được nghỉ rồi.','Gửi em một cái ôm giữa ngày, ôm chặt chặt luôn nè.','Mong em thấy thật nhiều điều dễ thương trong buổi chiều hôm nay.','Chiều nay anh không bên cạnh em được, nhưng tim anh vẫn đi theo em.','Cố gắng của em, anh đều thấy hết và đều trân trọng.','Nghỉ một chút rồi đi tiếp nhé em, không cần phải vội đâu.','Em là lý do khiến một buổi chiều bình thường cũng trở nên đáng nhớ.','Hít một hơi thật sâu nào em bé, mọi thứ rồi sẽ ổn thôi.','Anh chỉ muốn nhắn là anh đang thương em lắm, thế thôi.','Chúc em một buổi chiều nhẹ tênh, không áp lực.','Em có anh ở đây, nên đừng lo lắng một mình nhé.','Hết ngày hôm nay mình lại gần nhau thêm một chút, em nhé.'],pool=per==='sang'?M:(per==='trua'||per==='chieu')?MA:MN;
+  document.getElementById('gmMsg').textContent=S[key]||pool[doy%pool.length];
+  var START=new Date(2026,1,8,0,0,0),clk=document.getElementById('gmClock'),cnt=document.getElementById('gmCount');
+  function tick(){
+    var n=new Date(),df=Math.max(0,n-START),dd=Math.floor(df/864e5),rr=df%864e5;
+    clk.innerHTML=p2(n.getHours())+'<span class="cl-c">:</span>'+p2(n.getMinutes());
+    cnt.textContent=dd+' ngày '+Math.floor(rr/36e5)+' giờ '+Math.floor(rr%36e5/6e4)+' phút '+p2(Math.floor(rr%6e4/1e3))+' giây';
+  }
+  tick();
+  var tiv=setInterval(function(){if(!gm.isConnected){clearInterval(tiv);return}tick()},1000);
   var st=document.getElementById('gstars');
   for(var i=0;i<34;i++){var s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*62+'%';
     s.style.animationDelay=(Math.random()*3).toFixed(2)+'s';s.style.animationDuration=(2.2+Math.random()*2.5).toFixed(2)+'s';st.appendChild(s)}
