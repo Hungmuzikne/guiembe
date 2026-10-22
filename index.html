@@ -240,6 +240,43 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
 @media (prefers-reduced-motion:reduce){.cl-c,.gm-top{animation:none}}
 #gm .gm-h{font-size:clamp(2.1rem,9.4vw,3rem)}
 @media (max-width:360px){.gm-count{font-size:.9rem}}
+.fbtn{position:relative;margin-top:6px;display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#a3197a;font:700 .82rem system-ui,sans-serif;box-shadow:0 6px 18px rgba(190,60,120,.22);border:1px solid rgba(255,255,255,.9);white-space:nowrap}
+#fm{position:fixed;inset:0;z-index:50;display:none;padding:20px;background:rgba(40,10,55,.55);overflow-y:auto}
+#fm.show{display:flex}
+.fcard{position:relative;margin:auto;width:min(360px,100%);border-radius:20px;padding:22px 20px 18px;border:3px solid transparent;background:linear-gradient(180deg,#fffafc,#fff) padding-box,linear-gradient(135deg,#ffb3cf,#c9a6ff 50%,#ffb3cf) border-box;box-shadow:0 12px 40px rgba(255,110,170,.35);animation:pop .3s cubic-bezier(.2,1.4,.4,1)}
+.fcard h3{font:600 1.7rem "Dancing Script",cursive,serif;color:var(--pink);margin:0 0 4px;text-align:center}
+.fcard .sub{margin:0 0 12px;text-align:center;color:#8a5a78;font:.9rem/1.4 system-ui,sans-serif}
+.fcard textarea{display:block;width:100%;min-height:110px;resize:vertical;border:1.5px solid #f4c3d8;border-radius:12px;padding:10px 12px;font:1rem/1.45 system-ui,sans-serif;color:#4a2a40;background:#fff;outline:none}
+.fcard textarea:focus{border-color:#e0457f;box-shadow:0 0 0 3px rgba(224,69,127,.15)}
+.fcnt{text-align:right;font:.78rem system-ui,sans-serif;color:#b58aa5;margin:4px 2px 8px}
+.fstat{min-height:1.3em;text-align:center;font:600 .9rem system-ui,sans-serif;margin:0 0 10px}
+.fstat.ok{color:#2a8a5a}.fstat.err{color:#c2326b}
+.frow{display:flex;gap:10px;justify-content:center}
+.fsend{background:linear-gradient(135deg,#ff7aa8,#e0457f);color:#fff;font:700 1rem system-ui,sans-serif;padding:11px 28px;border-radius:999px;box-shadow:0 8px 18px rgba(224,69,127,.35)}
+.fsend[disabled]{opacity:.6}
+.fclose{background:transparent;color:#7d1160;font:600 1rem system-ui,sans-serif;padding:11px 20px;border-radius:999px;box-shadow:inset 0 0 0 2px #e8bcd3}
+.hp{position:absolute;left:-9999px;width:0;height:0;opacity:0}
+@media (min-width:900px){
+  #gm .gm-in{width:min(480px,100%);padding:36px 32px 28px}
+  #gm .gm-h{font-size:clamp(2.4rem,3.2vw,2.9rem)}
+  .gm-p{font-size:1.08rem}
+  .gm-clock{font-size:3.6rem}
+  .gm-love{font-size:.95rem}
+  .gm-count{font-size:1.1rem}
+  h1{max-width:780px;font-size:clamp(1.8rem,2.6vw,2.6rem)}
+  #sub{max-width:660px;font-size:1.1rem}
+}
+@media (min-width:900px) and (min-height:900px){
+  .ib{width:min(440px,46vw);margin-top:50px}
+  .bar{height:40px}
+  .fill{font-size:15px}
+  .lt{font-size:1.25rem}
+  .bd{width:124px}
+  .van>svg{width:min(270px,28vw)}
+  .bl svg{width:94px}
+  .scene{width:min(520px,56vw);margin-top:142px}
+  #hx{width:min(400px,40vw);height:min(230px,24vh)}
+}
 </style>
 </head>
 <body class="ld">
@@ -255,7 +292,7 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
   <div class="gm-in">
     <div><span class="gm-chip" id="gmDate">Hôm nay</span></div>
     <div class="gm-tag" id="gmTag">good morning, bé iu ♡</div>
-    <h2 class="gm-h" id="gmH">Chào ngày mới,<span>em bé ơi</span></h2>
+    <h2 class="gm-h" id="gmH">Chào ngày mới,<span>em bé iu</span></h2>
     <p class="gm-p" id="gmMsg">Chúc em bé một ngày thật dịu dàng,<br>nhiều nụ cười và ít muộn phiền.</p>
     <div class="gm-act"><button id="gmBtn" type="button"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.500 7l8.500 6 8.500-6"/></svg><span>Mở thư của anh</span></button></div>
     <div class="gm-sign">— gửi từ anh bé, với thật nhiều yêu thương</div>
@@ -271,6 +308,7 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
     <button id="yes">Đồng ý</button>
     <button id="no">Không</button>
   </div>
+  <button id="fbtn" class="fbtn" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.7L18.500 9.500l-4.700 1.800L12 16l-1.800-4.700L5.500 9.500l4.700-1.800z"/><path d="M19 15l.7 1.800L21.500 17.500l-1.800.7L19 20l-.7-1.800-1.800-.7 1.800-.7z"/></svg>Yêu cầu một tính năng</button>
 </main>
 
 <div id="modal" role="dialog" aria-modal="true" aria-labelledby="mt">
@@ -620,21 +658,18 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
   intro.inert=true;
   var d=new Date(),w=['Chủ nhật','Thứ hai','Thứ ba','Thứ tư','Thứ năm','Thứ sáu','Thứ bảy'][d.getDay()],
       p2=function(n){return (n<10?'0':'')+n};
-  var M=['Dậy rồi hả em bé? Nhớ uống nước và ăn sáng nha, anh thương em lắm.','Hôm nay có chuyện gì mệt thì em cứ nhắn anh, mình cùng nhau giải quyết.','Em bé cười lên là cả ngày của anh tự nhiên đẹp hơn hẳn.','Chúc em hôm nay gặp toàn điều dễ thương, và người dễ thương nhất vẫn là anh. Hihi.','Dù hôm nay bận cỡ nào, em cũng nhớ nghỉ ngơi một chút nha. Anh luôn đứng sau lưng em.','Mỗi sáng thức dậy, điều anh mong nhất là biết em vẫn bình yên và vui vẻ.','Hôm nay trời có thể nắng hoặc mưa, nhưng anh vẫn sẽ ở đây với em.','Em bé giỏi lắm rồi. Hôm nay cứ làm hết sức mình, còn lại để anh lo phần thương em.','Cảm ơn em vì đã xuất hiện trong cuộc sống của anh. Hôm nay anh vẫn biết ơn như ngày đầu.','Nếu hôm nay có ai làm em buồn, nhớ là em luôn có anh ở phía sau.','Mong em ngủ ngon, dậy sớm, và đừng quên rằng em là điều tuyệt nhất anh có.','Một ngày mới, một cơ hội nữa để anh yêu em nhiều hơn hôm qua.','Em bé nhớ mặc ấm và ăn uống đàng hoàng nha, anh lo lắm đó.','Anh không hứa hôm nay em sẽ không gặp khó khăn, nhưng anh hứa sẽ cùng em đi qua.','Có em là anh thấy ngày nào cũng đáng để thức dậy.','Gửi em một cái ôm thật chặt từ xa, nhận được chưa em bé?','Em cứ là chính em thôi, vì em đã đủ đáng yêu rồi.','Hôm nay nhớ cười thật nhiều nha, vì nụ cười của em là thứ anh thích nhất.','Dù mình ở đâu, tim anh vẫn luôn chạy về phía em.','Chúc em một ngày không áp lực, nhiều niềm vui, và có cả anh nhớ em nữa.','Em bé là nơi anh muốn trở về sau mỗi ngày mệt mỏi.','Hôm nay mình cùng cố gắng thêm một chút nữa nha em, vì tương lai của hai đứa.','Anh không giỏi nói lời hay, nhưng anh chắc chắn là thương em thật lòng.','Mong em hôm nay được ăn món em thích, gặp người em thương, và được anh thương nữa.','Đừng ngại mệt hay vấp ngã, vì em còn có anh để dựa vào mà.','Mỗi ngày trôi qua, anh lại thấy mình may mắn thêm một chút vì có em.','Chào em bé, hôm nay anh gửi thêm một ít nhớ thương vào ngày của em nhé.','Em xứng đáng được yêu thương dịu dàng, và anh sẽ cố gắng làm điều đó mỗi ngày.','Nếu hôm nay em thấy chênh vênh, hít thở thật sâu nha, anh ở đây rồi.','Mình cùng đi hết những ngày nắng và cả những ngày mưa nhé em.','Ngày mới vui nha em bé, và nhớ là hôm nay anh thương em hơn mọi hôm.'],
-      S={},
+  var S={},
       doy=Math.floor((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(d.getFullYear(),0,0))/864e5),
       key=d.getDate()+'-'+(d.getMonth()+1);
-  document.getElementById('gmMsg').textContent=S[key]||M[doy%M.length];
   document.getElementById('gmDate').textContent=w+' · '+p2(d.getDate())+'/'+p2(d.getMonth()+1);
   var hr=d.getHours(),night=!(hr>=6&&hr<18),reduceM=matchMedia('(prefers-reduced-motion:reduce)').matches;
   gm.classList.add(night?'night':'day');
-  var per=hr>=5&&hr<11?'sang':hr>=11&&hr<13?'trua':hr>=13&&hr<18?'chieu':hr>=18&&hr<22?'toi':'khuya',
-      TAG={sang:'good morning, bé iu ♡',trua:'trưa rồi, bé iu ăn cơm chưa ♡',chieu:'good afternoon, bé iu ♡',toi:'good evening, bé iu ♡',khuya:'good night, bé iu ♡'},
-      HD={sang:'Chào ngày mới,',trua:'Chào buổi trưa,',chieu:'Chào buổi chiều,',toi:'Chào buổi tối,',khuya:'Khuya rồi,'};
+  var per=hr>=5&&hr<6?'binhminh':hr>=6&&hr<11?'sang':hr>=11&&hr<13?'trua':hr>=13&&hr<18?'chieu':hr>=18&&hr<22?'toi':'khuya',
+      TAG={binhminh:'good morning, bé iu ♡',sang:'good morning, bé iu ♡',trua:'trưa rồi, bé iu ăn cơm chưa ♡',chieu:'good afternoon, bé iu ♡',toi:'good evening, bé iu ♡',khuya:'good night, bé iu ♡'},
+      HD={binhminh:'Chào ngày mới,',sang:'Chào ngày mới,',trua:'Chào buổi trưa,',chieu:'Chào buổi chiều,',toi:'Chào buổi tối,',khuya:'Khuya rồi,'};
   document.getElementById('gmTag').textContent=TAG[per];
-  document.getElementById('gmH').innerHTML=HD[per]+'<span>em bé ơi</span>';
+  document.getElementById('gmH').innerHTML=HD[per]+'<span>em bé iu</span>';
   if(night){
-    var MN=['Hôm nay em đã vất vả rồi. Giờ thì nghỉ ngơi đi nha, anh ở đây với em.','Ngủ ngon nha em bé, mơ thấy anh một chút cũng được.','Dù hôm nay thế nào, em vẫn là điều đẹp nhất trong ngày của anh.','Đặt điện thoại xuống rồi đi ngủ thôi em bé. Anh thương em, ngủ ngon nha.','Mong những giấc mơ đêm nay thật dịu dàng với em.','Gửi em một cái ôm thật chặt trước khi em đi ngủ nhé.','Nếu hôm nay có chuyện buồn, cứ để lại cho đêm nay, sáng mai anh cùng em đối mặt.','Trăng sáng quá nên anh nhớ em, em ngủ ngon nha.','Cảm ơn em vì hôm nay đã cố gắng. Anh tự hào về em lắm.','Chúc em một đêm thật bình yên, và một ngày mai thật nhẹ nhàng.','Em bé nhớ đắp chăn kỹ vào nha, kẻo lạnh anh lo.','Ngoài kia có hàng nghìn vì sao, nhưng anh chỉ muốn nhìn em thôi.','Đêm nay anh thầm ước cho em bình an, vui vẻ và luôn được yêu thương.','Mệt thì nghỉ, buồn thì kể, vì em có anh ở đây mà.','Hôm nay kết thúc rồi. Ngày mai lại là một cơ hội mới để mình thương nhau thêm.','Ngủ sớm một chút nha em bé, để mai anh còn được thấy em cười.','Mong em ngủ thật ngon, vì em xứng đáng được nghỉ ngơi.','Nhắm mắt lại và nhớ rằng có một người luôn nghĩ về em trước khi ngủ.','Chúc em một giấc ngủ không lo âu, chỉ có sao và trăng.','Dù mình ở xa hay gần, tim anh vẫn ở bên em mỗi đêm.','Em bé hôm nay giỏi lắm rồi. Giờ thì thư giãn thôi nha.','Anh gửi em một ngôi sao, giữ nó bên cạnh khi em ngủ nhé.','Nếu đêm nay em thấy trống trải, hãy nhớ có anh đang nhớ em đây.','Cảm ơn em đã ở bên anh thêm một ngày nữa. Ngủ ngon nha em bé.','Ngày mai dù có chuyện gì, mình vẫn cùng nhau đi tiếp em nhé.','Chúc em mơ thấy những điều đẹp nhất, và có anh ở trong đó.','Đêm yên tĩnh thế này, anh chỉ muốn nói là anh thương em nhiều lắm.','Em bé đừng thức khuya quá nha, sức khỏe của em quan trọng hơn mọi thứ.','Mong ánh trăng đêm nay thay anh canh giấc ngủ cho em.','Mọi lo lắng hôm nay cứ để đó, còn bây giờ chỉ cần ngủ thật ngon thôi.','Hẹn gặp em ở một ngày mới thật đẹp. Ngủ ngon, em bé của anh.'];
     var ns=document.getElementById('nstars');
     for(var q=0;q<70;q++){var sr=document.createElement('i'),z=Math.random();
       sr.style.left=Math.random()*100+'%';sr.style.top=Math.random()*85+'%';
@@ -667,7 +702,7 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
         +'<g class="lf r"><path d="M50 164C72 158 86 142 90 128C70 130 54 142 50 164Z" fill="#43a047"/></g>'
         +'<g class="hd">'+pb+pf+'<circle cx="50" cy="62" r="17" fill="#7a4a1e"/><circle cx="50" cy="62" r="12.5" fill="#5a3213"/>'+sd+'</g></svg>';
     };
-    var base=Math.min(260,innerHeight*.27),spec=[[4,.8],[22,1],[48,.7],[73,1.05],[94,.85]];
+    var wide=innerWidth>=900,base=Math.min(wide?300:260,innerHeight*(wide?.3:.27)),spec=wide?[[3,.8],[14,1],[26,.7],[38,.95],[50,.75],[62,1.05],[74,.8],[86,1],[96,.85]]:[[4,.8],[22,1],[48,.7],[73,1.05],[94,.85]];
     spec.forEach(function(s,i){
       var f=document.createElement('div'),hh=base*s[1],ww=hh*100/240;
       f.className='sf';f.style.height=hh+'px';f.style.width=ww+'px';f.style.left=s[0]+'%';f.style.marginLeft=(-ww/2)+'px';f.style.bottom=(-hh*.22)+'px';
@@ -678,7 +713,7 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
         wp.style.animationDuration=(10+Math.random()*8).toFixed(1)+'s';wp.style.animationDelay=(-Math.random()*14).toFixed(1)+'s';gd.appendChild(wp)}
     }
   }
-  var MA=['Giữa ngày rồi, em bé nhớ uống nước và nghỉ một chút nha.','Chiều nay mà thấy mệt, cứ nhắn anh một câu thôi cũng được.','Em bé cố lên nha, nửa ngày nữa là xong rồi, anh đang cổ vũ em.','Anh vừa nghĩ đến em và tự nhiên thấy buổi chiều dễ chịu hơn hẳn.','Nhớ ăn uống đầy đủ nha em bé, đừng để bụng đói mà làm việc.','Nắng chiều đẹp thật, nhưng chưa đẹp bằng lúc em cười.','Gửi em một chút năng lượng để em đi hết buổi chiều thật nhẹ nhàng.','Nếu hôm nay có chuyện làm em phiền lòng, cứ kể anh nghe nhé.','Em làm việc chăm chỉ lắm rồi, nghỉ vài phút rồi đi tiếp nha.','Chiều rồi, em bé nhớ vươn vai một cái cho đỡ mỏi nhé.','Dù bận đến đâu, em cũng là điều anh nghĩ đến đầu tiên.','Anh thương em nhiều hơn cả nắng chiều thương hoàng hôn.','Em bé đừng quên uống nước nha, anh nhắc em nè.','Hôm nay em đã làm được nhiều việc rồi, anh tự hào về em lắm.','Mong buổi chiều của em thật bình yên và nhiều điều vui.','Chỉ cần nghĩ đến em thôi là anh lại thấy mình có thêm sức mạnh.','Em mệt thì cứ dựa vào anh, anh ở đây mà.','Cả buổi chiều nay anh nhớ em, không biết em có nhớ anh không nè.','Có chuyện gì không vui thì để đó, lát nữa mình cùng nhau giải quyết.','Em bé giỏi lắm. Cố thêm chút nữa là được nghỉ rồi.','Gửi em một cái ôm giữa ngày, ôm chặt chặt luôn nè.','Mong em thấy thật nhiều điều dễ thương trong buổi chiều hôm nay.','Chiều nay anh không bên cạnh em được, nhưng tim anh vẫn đi theo em.','Cố gắng của em, anh đều thấy hết và đều trân trọng.','Nghỉ một chút rồi đi tiếp nhé em, không cần phải vội đâu.','Em là lý do khiến một buổi chiều bình thường cũng trở nên đáng nhớ.','Hít một hơi thật sâu nào em bé, mọi thứ rồi sẽ ổn thôi.','Anh chỉ muốn nhắn là anh đang thương em lắm, thế thôi.','Chúc em một buổi chiều nhẹ tênh, không áp lực.','Em có anh ở đây, nên đừng lo lắng một mình nhé.','Hết ngày hôm nay mình lại gần nhau thêm một chút, em nhé.'],pool=per==='sang'?M:(per==='trua'||per==='chieu')?MA:MN;
+  var SETS={binhminh:['Chào ngày mới, em bé của anh. Dậy đón chào ngày mới thật là tươi sáng nào.','Trời còn tối, nhưng nghĩ về em thôi cũng đủ sưởi ấm trái tim anh.','Mong em thức dậy với nụ cười và đi ngủ với lòng bình yên.','Dù hôm nay thế nào, em bé nhớ rằng anh luôn thương em nhé.','Em chính là lý do khiến anh muốn trở thành phiên bản tốt hơn.','Anh mong mọi điều tốt đẹp sẽ tìm đến cô gái anh thương.','Nếu hôm nay mệt mỏi, em cứ yếu lòng một chút, anh vẫn ở đây.','Chưa cần gặp em, chỉ nghĩ đến em thôi anh đã thấy vui rồi.','Anh ước mình có thể ôm em thật chặt vào buổi sáng sớm này.','Chúc em một ngày bình an, còn nhớ em cứ để anh lo.','Em không cần hoàn hảo, vì trong mắt anh, em đã rất đặc biệt.','Mong những giấc mơ đẹp sẽ tiếp tục đồng hành cùng em hôm nay.','Có em trong tương lai là điều anh luôn âm thầm mong đợi.','Anh muốn trở thành người khiến em mỉm cười ngay cả những ngày buồn.','Em bé hãy nhớ chăm sóc bản thân như cách anh muốn chăm sóc em.','Mỗi ngày có em là một ngày anh thấy cuộc sống đáng yêu hơn.','Anh chẳng mong gì nhiều, chỉ mong em luôn khỏe mạnh và hạnh phúc.','Mong bình minh hôm nay mang đến cho em thật nhiều hy vọng.','Anh thương cả những điều nhỏ bé mà đôi khi em chẳng nhận ra.','Nếu thế giới khiến em mệt, hãy nhớ anh vẫn luôn đứng về phía em.','Anh muốn cùng em viết tiếp những ngày bình thường thành kỷ niệm đẹp.','Em bé à, hôm nay cũng hãy tự hào về chính mình nhé.','Anh chẳng cần ngày nào cũng rực rỡ, chỉ cần em luôn bình an.','Có em, anh tìm thấy thêm nhiều lý do để cố gắng mỗi ngày.','Anh mong trái tim em luôn được lấp đầy bằng những điều tử tế.','Dậy thôi em bé, hôm nay lại có thêm một ngày để yêu đời.','Anh muốn được nghe em kể cả những chuyện nhỏ xíu trong ngày.','Em cứ theo đuổi ước mơ, anh sẽ luôn cổ vũ em.','Nếu được ước một điều sáng nay, anh sẽ ước em luôn hạnh phúc.','Chào ngày mới, cô gái khiến trái tim anh rung động mỗi ngày.','Mong một ngày nào đó, anh vẫn được chúc em buổi sáng như thế này.'],sang:['Chào em bé xinh yêu, chúc em hôm nay gặp toàn chuyện đáng yêu.','Mỗi khi nghĩ về em, anh lại thấy bản thân có thêm nhiều sức mạnh.','Em là chiếc thông báo yêu thích nhất mà anh luôn mong chờ.','Chúc công chúa nhỏ hôm nay xinh đẹp, vui vẻ và may mắn.','Anh không cần em hoàn hảo, anh chỉ cần em luôn là chính mình.','Có em trong cuộc sống, những ngày bình thường cũng hóa thành đặc biệt.','Em bé nhớ ăn sáng nha, anh còn muốn em khỏe mạnh để yêu anh.','Anh mong nụ cười hôm nay sẽ ở lại trên môi em thật lâu.','Yêu em khiến anh hiểu rằng trưởng thành cũng có thể bắt đầu từ nhớ thương.','Em cứ tỏa sáng theo cách riêng, anh thích phiên bản chân thật nhất của em.','Anh muốn trở thành lý do khiến em tin rằng tình yêu thật sự tồn tại.','Chúc em một ngày thuận lợi, còn những chuyện buồn hãy kể anh nghe.','Anh thích cả những lúc em mè nheo, vì đó là em bé của anh.','Nếu hôm nay khó khăn, mình cứ bình tĩnh giải quyết từng chút nhé.','Anh chẳng giỏi nhất thế giới, nhưng anh thật lòng muốn yêu em thật tốt.','Em là điều ngọt ngào mà anh chẳng bao giờ muốn trở thành thói quen.','Mong hôm nay em nhận được nhiều yêu thương như cách em xứng đáng.','Anh muốn cùng em biến những ước mơ nhỏ thành kỷ niệm thật lớn.','Em bé đừng so sánh mình với ai, trong lòng anh em luôn đặc biệt.','Chỉ cần thấy em vui, anh cũng cảm thấy ngày hôm ấy đáng giá.','Anh muốn được nghe em kể chuyện linh tinh đến tận lúc cả hai buồn ngủ.','Tình yêu của anh không hoàn hảo, nhưng sự chân thành thì luôn có thật.','Mong hôm nay em đủ tự tin để làm những điều mình yêu thích.','Em không cần mạnh mẽ mọi lúc, vì em cũng xứng đáng được chở che.','Anh muốn mỗi lần mở web, em đều cảm nhận được một chút nhớ thương.','Em bé là món quà bất ngờ mà cuộc đời đã dịu dàng dành cho anh.','Anh thương em không chỉ vì em đáng yêu, mà vì em là em.','Chúc em hôm nay nhiều niềm vui hơn lo lắng, nhiều tiếng cười hơn mệt mỏi.','Sau này bận rộn đến đâu, anh vẫn muốn dành thời gian cho em.','Anh chẳng hứa cả thế giới, nhưng anh muốn cùng em xây thế giới riêng.','Chúc em ngày mới rực rỡ, còn trái tim anh thì vẫn hướng về em.'],trua:['Trưa rồi em bé, nhớ ăn no để lấy sức cho một buổi chiều làm việc dài.','Giữa ngày bận rộn, anh vẫn luôn dành một góc nhỏ để nhớ em.','Em ăn ngon miệng nha, anh gửi kèm một nghìn cái hôn qua màn hình.','Nếu sáng nay chưa vui, mong buổi trưa sẽ dịu dàng với em hơn.','Anh ước được ngồi cạnh em, ăn một bữa cơm bình thường mà hạnh phúc.','Em bé nhớ uống nước nhé, anh không ở cạnh nhưng vẫn muốn chăm em.','Anh thích hỏi em ăn gì, vì những điều nhỏ bé cũng là yêu thương.','Mệt thì nghỉ một chút nha, em không cần cố gắng đến kiệt sức.','Mong bữa trưa của em ngon miệng và buổi chiều chẳng có muộn phiền.','Anh muốn nghe cả những chuyện vụn vặt mà em nghĩ chẳng ai quan tâm.','Em chẳng cần làm gì đặc biệt để xứng đáng được anh yêu thương.','Có em để nhớ giữa ngày khiến những giờ làm việc của anh dễ chịu hơn.','Bé yêu ăn no nhé, anh còn muốn em có thật nhiều năng lượng.','Anh mong em luôn dịu dàng với chính mình như cách em dịu dàng với anh.','Nếu hôm nay mệt quá, cứ cho bản thân nghỉ ngơi mà không cần thấy có lỗi.','Anh không thể ở cạnh mỗi bữa, nhưng vẫn muốn nhắc em ăn đúng giờ.','Em bé à, hạnh phúc đôi khi chỉ là một bữa cơm ngon và một người nhớ mình.','Anh muốn cùng em chia sẻ những chuyện nhỏ, chứ chẳng chỉ những dịp đặc biệt.','Chúc em buổi trưa bình yên, mọi áp lực tạm gác lại phía sau.','Anh mong em luôn có người lắng nghe, kể cả những lúc chẳng biết nói gì.','Em bé cứ ăn ngon, còn chuyện nhớ em thì để anh tự nguyện.','Anh thương những cố gắng thầm lặng của em, dù chẳng phải ai cũng nhìn thấy.','Nghỉ một chút nha em, cuộc sống còn dài, mình không cần chạy mãi đâu.','Anh muốn tình yêu của mình hiện diện trong những quan tâm giản dị như thế.','Em xứng đáng được nghỉ ngơi, được vui vẻ và được yêu thương thật lòng.','Nếu có chuyện buồn, đừng giữ mãi trong lòng, anh muốn được nghe em kể.','Anh hy vọng mỗi ngày của em đều có một điều nhỏ khiến em mỉm cười.','Bữa trưa hôm nay có ngon không em? Anh thì thấy nhớ em hơi nhiều rồi.','Anh muốn cùng em đi qua những ngày bình thường, vì đó mới là cuộc sống.','Em bé cứ từ từ thôi, anh không muốn em đánh đổi sức khỏe lấy thành tích.','Ăn no rồi nhớ nghỉ ngơi nhé, cô gái nhỏ mà anh thương hơn lời nói.'],chieu:['Chào buổi chiều em bé, mong những mệt mỏi hôm nay nhẹ nhàng trôi qua.','Nghĩ đến em, anh lại có thêm động lực để cố gắng vì tương lai.','Em không cần giỏi nhất, chỉ cần mỗi ngày tiến thêm một chút là đáng tự hào.','Anh muốn cùng em trưởng thành, chứ chẳng muốn em phải thay đổi để vừa lòng anh.','Nếu hôm nay chưa thành công, ngày mai mình lại thử thêm lần nữa nhé.','Anh tự hào về những cố gắng mà đôi khi chính em cũng quên mất.','Em cứ theo đuổi ước mơ, anh sẽ luôn là người cổ vũ em.','Anh mong tình yêu này giúp em mạnh mẽ hơn, chứ không khiến em nhỏ bé đi.','Buổi chiều rồi, bé yêu nhớ nghỉ mắt một chút nếu đã làm việc lâu.','Anh không thể đi thay con đường của em, nhưng anh muốn đồng hành thật lâu.','Có em trong tương lai khiến anh muốn sống trách nhiệm hơn mỗi ngày.','Em bé đừng tự trách mình quá nhiều, ai cũng cần thời gian để trưởng thành.','Anh thích nhìn em tiến bộ, dù chỉ là những thay đổi nhỏ xíu.','Nếu thấy mệt, mình nghỉ một chút nhé, chẳng ai bắt em phải hoàn hảo.','Anh muốn được chứng kiến em chạm đến những ước mơ từng kể với anh.','Em xứng đáng với những điều tốt đẹp, kể cả khi hôm nay chưa như ý.','Anh mong mình luôn đủ kiên nhẫn để hiểu nhau, ngay cả khi bất đồng.','Đừng vì vài lời chê bai mà quên mất những điều tuyệt vời ở bản thân.','Anh muốn yêu em bằng hành động, để lời nói ngọt ngào chẳng chỉ là lời hứa.','Em bé à, từng bước nhỏ hôm nay có thể tạo nên tương lai em mong muốn.','Anh hy vọng sau này mình cùng nhìn lại tuổi trẻ và tự hào vì đã cố gắng.','Em không cần giấu nỗi buồn để khiến anh yên tâm, cứ là chính mình nhé.','Anh muốn cùng em giải quyết vấn đề, chứ không muốn chúng mình trở thành vấn đề của nhau.','Mỗi ngày có em, anh lại hiểu thêm một chút về sự chân thành.','Dù hôm nay tiến chậm, em vẫn đang tiến về phía trước, đừng quên điều đó.','Anh mong em luôn giữ được sự đáng yêu và những ước mơ của riêng mình.','Tình yêu đẹp nhất là khi cả hai cùng lớn lên mà vẫn chọn nhau.','Em bé không phải cạnh tranh với ai cả, hành trình của em thuộc về em.','Anh muốn trở thành người em có thể tin tưởng, kể cả khi em yếu lòng.','Nếu hôm nay đã cố hết sức, em hãy tự thưởng cho mình một nụ cười nhé.','Buổi chiều sắp qua rồi, mong em khép lại công việc với lòng thật nhẹ nhàng.'],toi:['Chào buổi tối, em bé của anh. Hôm nay em có vui không?','Nếu được ước dưới bầu trời sao, anh sẽ ước chúng mình mãi chân thành.','Anh chẳng cần một tình yêu hoàn hảo, anh chỉ cần chúng mình thật lòng.','Sau một ngày dài, anh mong em tìm thấy bình yên trong những điều giản dị.','Anh thích những buổi tối được nghe em kể chuyện, dù chẳng có gì đặc biệt.','Em bé à, hôm nay mệt rồi thì để trái tim nghỉ ngơi một chút nhé.','Anh muốn trở thành người em nghĩ đến mỗi khi cần một cái ôm.','Giữa hàng triệu người, anh vẫn thấy mình thật may mắn khi gặp em.','Anh không hứa chẳng bao giờ cãi nhau, anh hứa sẽ cố gắng hiểu em hơn.','Nếu hôm nay em buồn, anh mong mình có thể khiến em cười một chút.','Anh muốn cùng em tạo nên những kỷ niệm mà nhiều năm sau vẫn thấy ngọt ngào.','Trăng có thể khuyết, sao có thể tắt, nhưng anh vẫn muốn thương em chân thành.','Anh mong em luôn cảm thấy an toàn khi chia sẻ những điều trong lòng.','Chẳng cần ngày lễ, anh vẫn muốn nói rằng em quan trọng với anh biết bao.','Anh muốn cùng em trải qua cả những ngày bình thường lẫn những dịp đặc biệt.','Em bé không cần giấu cảm xúc, vì anh muốn hiểu cả những lúc em chẳng vui.','Anh mong tình yêu của chúng mình luôn có sự tôn trọng, tin tưởng và bao dung.','Nếu cuộc đời là hành trình dài, anh muốn chúng mình cùng nhau ngắm cảnh.','Anh thích tưởng tượng về một mái nhà nhỏ có em và những buổi tối bình yên.','Em chính là người khiến anh muốn kể về tương lai bằng hai chữ chúng mình.','Anh mong sau này bận rộn đến đâu, chúng mình vẫn dành thời gian cho nhau.','Được nghe giọng em sau một ngày dài đôi khi là hạnh phúc anh cần nhất.','Anh chẳng cần em lúc nào cũng vui, anh chỉ mong em luôn được là mình.','Nếu có hiểu lầm, anh mong chúng mình chọn trò chuyện thay vì im lặng rời xa.','Anh muốn tình yêu này là nơi cả hai được nghỉ ngơi sau những bộn bề.','Em bé à, cảm ơn em đã xuất hiện và khiến những ngày của anh thêm ý nghĩa.','Anh mong những điều tốt đẹp sẽ đến với em, dù anh có ở cạnh hay không.','Anh không yêu em vì em hoàn hảo, anh yêu cả những điều khiến em khác biệt.','Sau này tóc bạc, anh vẫn muốn nghe em kể những câu chuyện chẳng đầu chẳng cuối.','Anh muốn cùng em đi qua năm tháng, không chỉ cùng nhau đi qua những ngày vui.','Chúc em buổi tối an lành, và nhớ rằng có một người thương em rất nhiều.'],khuya:['Khuya rồi em bé, gác điện thoại xuống và ngủ ngon nhé, anh thương em.','Ước gì lúc này anh có thể ôm em vào lòng và chúc em ngủ ngon.','Nhắm mắt nhé em, mong mọi muộn phiền hôm nay tan vào giấc mơ đẹp.','Nếu hôm nay chưa vui, ngày mai mình lại bắt đầu bằng một nụ cười nhé.','Anh mong em ngủ thật ngon, để ngày mai thức dậy với trái tim nhẹ nhàng.','Dù đêm nay chúng mình cách xa, anh vẫn gửi em một cái ôm thật ấm.','Em bé ngủ ngoan nha, trong giấc mơ nhớ chừa cho anh một chỗ.','Anh chẳng thể canh giấc ngủ em, chỉ có thể âm thầm mong em bình an.','Đừng thức khuya suy nghĩ quá nhiều nhé, em bé xứng đáng được nghỉ ngơi.','Nếu đêm nay thấy cô đơn, hãy nhớ rằng em luôn có người thương mình.','Anh mong giấc mơ sẽ dịu dàng với em hơn những điều khiến em lo lắng.','Khuya rồi, mọi chuyện để ngày mai nhé, giờ em chỉ cần ngủ thật ngon.','Anh muốn là người em nhớ đến với cảm giác ấm áp, chứ chẳng phải muộn phiền.','Ngủ ngon nhé công chúa, ngày mai anh lại tiếp tục thương em nhiều hơn.','Anh ước có thể hôn nhẹ lên trán em rồi kéo chăn cho em ngủ.','Dù hôm nay thế nào, em vẫn xứng đáng được yêu thương và nghỉ ngơi thật tốt.','Mong đêm nay ôm lấy em bằng sự bình yên mà anh luôn muốn dành tặng.','Anh không mong em mơ thấy điều gì lớn lao, chỉ mong em ngủ thật an lành.','Em bé à, đừng mang nỗi buồn đi ngủ một mình, anh luôn sẵn lòng lắng nghe.','Có lẽ điều ngọt ngào nhất là biết rằng ngày mai mình vẫn còn nhau.','Anh muốn mỗi đêm đều được nhắc em rằng em quan trọng với anh biết bao.','Ngủ ngoan nha bé, anh gửi hết nhớ thương vào ánh trăng đêm nay.','Nếu giấc mơ có thể chọn người đồng hành, anh mong mình vẫn tìm thấy nhau.','Anh mong ngày mai thức dậy, em vẫn thấy cuộc sống có nhiều điều đáng yêu.','Đừng lo về ngày mai quá nhiều, em bé cứ để bản thân nghỉ ngơi trước nhé.','Anh thương cả những lúc em yếu lòng, nên chẳng cần phải cố tỏ ra ổn.','Trước khi ngủ, nhớ rằng em đã cố gắng rất nhiều và anh tự hào về em.','Ước gì khoảng cách biến mất, để lời chúc ngủ ngon trở thành một cái ôm.','Nếu được chọn lại, anh vẫn muốn gặp em và bắt đầu hành trình này.','Mong giấc ngủ mang đến bình yên, còn ngày mai mang đến những điều em mong.','Ngủ ngon em bé của anh, mong mỗi bình minh chúng mình vẫn chọn yêu nhau.']},pool=SETS[per];
   document.getElementById('gmMsg').textContent=S[key]||pool[doy%pool.length];
   var START=new Date(2026,1,8,0,0,0),clk=document.getElementById('gmClock'),cnt=document.getElementById('gmCount');
   function tick(){
@@ -700,6 +735,49 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
     if(window.__startLoad)window.__startLoad();
     if(window.__startHx)window.__startHx();
     setTimeout(function(){gm.remove()},900);
+  });
+})();
+</script>
+<div id="fm" role="dialog" aria-modal="true" aria-labelledby="fTitle"><div class="fcard">
+  <h3 id="fTitle">Em muốn thêm gì nè?</h3>
+  <p class="sub">Viết tính năng em muốn, anh sẽ cố gắng làm cho em nha.</p>
+  <input id="fHp" class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <textarea id="fText" maxlength="500" placeholder="Ví dụ: thêm một bài nhạc khác, thêm ảnh của mình..." aria-label="Tính năng em muốn"></textarea>
+  <div class="fcnt" id="fCnt">0/500</div>
+  <div class="fstat" id="fStat" role="status"></div>
+  <div class="frow"><button id="fClose" class="fclose" type="button">Đóng</button><button id="fSend" class="fsend" type="button">Gửi</button></div>
+</div></div>
+<script>
+(function(){
+  /* Dữ liệu được gửi thẳng về email này qua dịch vụ FormSubmit (miễn phí). Lần đầu cần bấm xác nhận trong email kích hoạt. */
+  var MAIL='tranhung4299@gmail.com',URL='https://formsubmit.co/ajax/'+MAIL;
+  var fb=document.getElementById('fbtn'),fm=document.getElementById('fm'),ta=document.getElementById('fText'),cnt=document.getElementById('fCnt'),
+      st=document.getElementById('fStat'),sendBtn=document.getElementById('fSend'),cl=document.getElementById('fClose'),hp=document.getElementById('fHp'),
+      busy=false,lastFocus=null;
+  function open(){lastFocus=document.activeElement;fm.classList.add('show');st.textContent='';st.className='fstat';setTimeout(function(){ta.focus()},60)}
+  function close(){fm.classList.remove('show');if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+  function upd(){cnt.textContent=ta.value.length+'/500'}
+  fb.addEventListener('click',open);cl.addEventListener('click',close);
+  fm.addEventListener('click',function(e){if(e.target===fm)close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&fm.classList.contains('show'))close()});
+  ta.addEventListener('input',upd);upd();
+  function say(t,ok){st.textContent=t;st.className='fstat '+(ok?'ok':'err')}
+  sendBtn.addEventListener('click',function(){
+    if(busy||hp.value)return;
+    var text=ta.value.trim();
+    if(!text){say('Em viết gì đó cho anh nhé',false);ta.focus();return}
+    try{var last=+localStorage.getItem('fts')||0;if(Date.now()-last<15000){say('Đợi một chút rồi gửi tiếp nha',false);return}}catch(e){}
+    busy=true;sendBtn.disabled=true;say('Đang gửi...',true);
+    function done(){busy=false;sendBtn.disabled=false;say('Đã gửi cho anh rồi nha',true);try{localStorage.setItem('fts',String(Date.now()))}catch(e){}ta.value='';upd();setTimeout(function(){if(fm.classList.contains('show'))close()},2600)}
+    function fail(){busy=false;sendBtn.disabled=false;say('Gửi chưa được, em thử lại nha',false)}
+    var ctl=window.AbortController?new AbortController():null,tm=setTimeout(function(){if(ctl)ctl.abort()},15000),
+        when='';
+    try{when=new Date().toLocaleString('vi-VN',{timeZone:'Asia/Ho_Chi_Minh'})}catch(e){when=new Date().toISOString()}
+    var body={'Yêu cầu tính năng':text.slice(0,500),'Thời gian':when,'Thiết bị':(navigator.userAgent||'').slice(0,120),
+      '_subject':'Yêu cầu tính năng mới từ trang web','_template':'table','_captcha':'false','_honey':''};
+    fetch(URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body),signal:ctl?ctl.signal:undefined})
+      .then(function(r){clearTimeout(tm);return r.json().catch(function(){return {}}).then(function(j){if(r.ok&&String(j.success)!=='false')done();else fail()})},
+            function(){clearTimeout(tm);fail()});
   });
 })();
 </script>
