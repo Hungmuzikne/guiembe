@@ -277,6 +277,50 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
   .scene{width:min(520px,56vw);margin-top:142px}
   #hx{width:min(400px,40vw);height:min(230px,24vh)}
 }
+#fwv{position:fixed;inset:0;z-index:59;pointer-events:none;background:linear-gradient(180deg,rgba(8,4,28,.62),rgba(20,10,50,.3));opacity:0;transition:opacity .8s}
+#fwv.on{opacity:1}
+#gm.hw1{background:linear-gradient(180deg,#ffc27a 0%,#ff9a8b 40%,#d983b8 72%,#8d62b8 100%)}
+#gm.hw2{background:linear-gradient(180deg,#1d0f45 0%,#4a1d78 38%,#a53a86 70%,#ff7a59 100%)}
+#gm.hw3{background:linear-gradient(180deg,#05071d 0%,#0e1442 45%,#26205e 78%,#4a2a73 100%)}
+#gm.hw1 .gday,#gm.hw1 .sun,#gm.hw1 .gstars,#gm.hw2 .gnight,#gm.hw2 .sun,#gm.hw2 .gstars,#gm.hw2 .gday,#gm.hw3 .gday,#gm.hw3 .sun,#gm.hw3 .gstars{display:none}
+#gm.hw1 .x1{background:#ffb347}#gm.hw1 .x2{background:#ff7aa8}#gm.hw1 .x3{background:#c07bff}
+#gm.hw2 .x1{background:#ff7a59}#gm.hw2 .x2{background:#c040a0}#gm.hw2 .x3{background:#6a3cd0}
+#gm.hw3 .x1{background:#2f3fb8}#gm.hw3 .x2{background:#7a3fc8}#gm.hw3 .x3{background:#2a8fc0}
+.ghw{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.hwo{position:absolute}.hwo svg{display:block;overflow:visible}
+.hwr{animation:hwr linear infinite}
+@keyframes hwr{0%{transform:translateY(0) scale(.8);opacity:0}15%{opacity:.85}100%{transform:translateY(-105vh) scale(1.15);opacity:0}}
+.hwpk svg{filter:drop-shadow(0 0 9px rgba(255,170,40,.5));animation:pkg 2.6s ease-in-out infinite alternate}
+@keyframes pkg{to{filter:drop-shadow(0 0 18px rgba(255,190,60,.95))}}
+.hwgh{animation:hwgo 4s ease-in-out infinite alternate}
+.hwgh svg,.hwcpa svg,.hwcpb svg{filter:drop-shadow(0 0 10px rgba(255,255,255,.55));opacity:.95}
+@keyframes hwgo{from{transform:translateY(-8px) rotate(-5deg)}to{transform:translateY(10px) rotate(5deg)}}
+.hwform{animation:hwdr 28s linear infinite}
+@keyframes hwdr{from{transform:translateX(-40vw)}to{transform:translateX(112vw)}}
+.hwb{position:absolute;margin:-10px 0 0 -10px}
+.hwb svg .bw,.hwfly svg .bw{transform-box:fill-box;transform-origin:50% 100%;animation:flp .32s ease-in-out infinite alternate}
+@keyframes flp{to{transform:scaleY(.45)}}
+.hwfly{animation:hwfl linear infinite}
+@keyframes hwfl{from{transform:translateX(0) translateY(0)}50%{transform:translateX(60vw) translateY(-6vh)}to{transform:translateX(125vw) translateY(4vh)}}
+.hwl{position:absolute;top:-30px;animation:hwlf linear infinite}
+@keyframes hwlf{to{transform:translate3d(var(--dx),112vh,0) rotate(var(--rot))}}
+.hwl i{display:block;border-radius:0 100% 0 100%;opacity:.9}
+.lan{transform-box:fill-box;transform-origin:50% 0;animation:lsw 2.4s ease-in-out infinite alternate;animation-delay:var(--d)}
+@keyframes lsw{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+.hwff{width:5px;height:5px;border-radius:50%;background:#ffe27a;box-shadow:0 0 9px 3px rgba(255,226,122,.75);animation:hwfi ease-in-out infinite alternate}
+@keyframes hwfi{from{transform:translate(0,0);opacity:.2}to{transform:translate(var(--dx),var(--dy));opacity:1}}
+.hwcp{display:flex;align-items:flex-end;animation:hwgo 4.4s ease-in-out infinite alternate}
+.hwcpa{transform:rotate(-8deg);margin-right:-10px}.hwcpb{transform:rotate(8deg);margin-bottom:-4px}
+.hwcph{position:absolute;left:50%;top:-18px;translate:-50% 0;color:#ff7fb5;font-size:20px;animation:hwhp 1s ease-in-out infinite alternate}
+@keyframes hwhp{to{transform:scale(1.3)}}
+.hwwitch{animation:hww linear infinite}
+@keyframes hww{from{transform:translate(0,0)}50%{transform:translate(70vw,-3vh)}to{transform:translate(150vw,2vh)}}
+.hwwitch::before{content:'♥ ♥ ♥ ♥ ♥';position:absolute;right:100%;top:46%;white-space:nowrap;letter-spacing:7px;font-size:12px;color:#ff9fd0;-webkit-mask-image:linear-gradient(90deg,transparent,#000);mask-image:linear-gradient(90deg,transparent,#000)}
+.hwcat .ce{animation:hwbl 5s infinite}
+@keyframes hwbl{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.pkf{animation:pkf 2.6s ease-in-out infinite alternate}
+@keyframes pkf{from{opacity:.75}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.hwo,.hwo *,.hwl,.hwform,.hwr,.hwb{animation:none!important}}
 </style>
 </head>
 <body class="ld">
@@ -355,6 +399,7 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
   function dodge(e){
     if(e&&e.cancelable)e.preventDefault();
     dodges++;
+    if(window.SFX)SFX.play('bloop');
     yes.style.setProperty('--s',(1+dodges*0.1).toFixed(2));
     if(dodges>=12){no.style.transform='scale(0)';no.style.opacity=0;no.style.pointerEvents='none';setTimeout(function(){no.style.display='none'},600);return}
     var w=no.offsetWidth,h=no.offsetHeight;
@@ -378,36 +423,72 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
   document.getElementById('ok').addEventListener('click',function(){fireworks();playSecond();showMem();document.getElementById('tip').style.display='none';this.classList.remove('hint')});
   document.getElementById('home').addEventListener('click',function(){location.reload()});
 
-  var fw=document.createElement('canvas'),cx=fw.getContext('2d'),ps=[],running=false,pending=0,
-      dpr=Math.min(2,window.devicePixelRatio||1),
-      pal=['#ff4fa3','#ffd84f','#4fe3ff','#b66bff','#ffffff','#ff8a4f'];
-  fw.id='fw';document.body.appendChild(fw);
+  var fw=document.createElement('canvas'),cx=fw.getContext('2d'),veil=document.createElement('div'),
+      dpr=Math.min(2,window.devicePixelRatio||1),R=[],S=[],FL=[],running=false,pend=0,lastT=0,
+      reduceFx=matchMedia('(prefers-reduced-motion:reduce)').matches,
+      PAL=[[255,70,60],[255,205,70],[90,170,255],[100,255,160],[255,100,215],[255,255,255],[255,140,40],[190,120,255]];
+  fw.id='fw';veil.id='fwv';document.body.appendChild(veil);document.body.appendChild(fw);
   function fit(){fw.width=innerWidth*dpr;fw.height=innerHeight*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
   fit();addEventListener('resize',fit);
-  function burst(x,y){
-    var col=pal[Math.floor(Math.random()*pal.length)];
-    for(var i=0;i<80;i++){var a=Math.random()*6.283,s=1+Math.random()*5.5;
-      ps.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:1,c:col,r:1.3+Math.random()*1.7})}
+  function sc(){return Math.max(.95,Math.min(1.6,Math.min(innerWidth,innerHeight)/480))}
+  function rnd(lo,hi){return lo+Math.random()*(hi-lo)}
+  function launch(){
+    var W=innerWidth,H=innerHeight,fx=W>900&&Math.random()<.65?(Math.random()<.5?rnd(.08,.3):rnd(.7,.92)):rnd(.16,.84),x0=fx*W,T=rnd(48,70);
+    R.push({x:x0,y:H+8,x0:x0,y0:H+8,tx:x0+rnd(-.06,.06)*W,ty:rnd(.14,.44)*H,t:0,T:T});
+    if(window.SFX)SFX.launch(x0/W,T/60);
   }
-  function tick(){
-    cx.globalCompositeOperation='destination-out';
-    cx.fillStyle='rgba(0,0,0,.2)';cx.fillRect(0,0,innerWidth,innerHeight);
+  function shell(x,y){
+    var m=sc(),kind=['peony','chrys','willow','crackle','ring'][Math.floor(Math.random()*5)],
+        c1=PAL[Math.floor(Math.random()*PAL.length)],c2=PAL[Math.floor(Math.random()*PAL.length)],n,i,a,b,z,sp,vx,vy,col,ang,t2;
+    if(kind==='willow'){c1=[255,200,90];c2=[255,150,60]}
+    n=kind==='willow'?80:kind==='ring'?70:kind==='crackle'?90:kind==='chrys'?110:130;
+    if(reduceFx)n=Math.round(n*.5);
+    for(i=0;i<n;i++){
+      z=rnd(-1,1);a=rnd(0,6.2832);b=Math.sqrt(1-z*z);
+      vx=Math.cos(a)*b;vy=Math.sin(a)*b;
+      sp=(kind==='willow'?rnd(1.6,2.9):kind==='chrys'?rnd(2.4,4.4):kind==='ring'?3.3:rnd(2.0,4.2))*m;
+      if(kind==='ring'){ang=i/n*6.2832;vx=Math.cos(ang);vy=Math.sin(ang)*.55;t2=vx*.825-vy*.565;vy=vx*.565+vy*.825;vx=t2}
+      col=(kind==='peony'&&i%2)?c2:c1;
+      S.push({x:x,y:y,vx:vx*sp,vy:vy*sp,col:col,age:0,life:kind==='willow'?rnd(110,150):kind==='crackle'?rnd(70,95):rnd(62,92),
+        drag:kind==='willow'?.986:.972,g:(kind==='willow'?.052:.034)*m,trail:kind==='chrys'||kind==='willow',crk:kind==='crackle',sz:rnd(1.2,2.1)*(m>1?1.1:1),tr:false});
+    }
+    if(S.length>2200)S.splice(0,S.length-2200);
+    FL.push({x:x,y:y,a:.26,r:170*m});
+    if(window.SFX){SFX.boom(x/innerWidth,rnd(.12,.34),kind==='willow'?.8:1);if(kind==='crackle'||kind==='willow')SFX.crackle(x/innerWidth,.4)}
+  }
+  function frame(now){
+    var st=Math.min(2.5,(now-lastT)/16.667||1),i,p,r,f,g,u,hot,al,px,py,d,cr,cg,cb;lastT=now;
+    cx.globalCompositeOperation='destination-out';cx.fillStyle='rgba(0,0,0,'+(.22*Math.min(2,st)).toFixed(2)+')';cx.fillRect(0,0,innerWidth,innerHeight);
     cx.globalCompositeOperation='lighter';
-    ps=ps.filter(function(p){
-      p.x+=p.vx;p.y+=p.vy;p.vy+=.05;p.vx*=.985;p.vy*=.985;p.l-=.011;
-      if(p.l<=0)return false;
-      cx.globalAlpha=p.l;cx.fillStyle=p.c;cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.fill();
-      return true;
-    });
+    for(i=FL.length-1;i>=0;i--){f=FL[i];g=cx.createRadialGradient(f.x,f.y,0,f.x,f.y,f.r);
+      g.addColorStop(0,'rgba(255,245,220,'+f.a.toFixed(3)+')');g.addColorStop(1,'rgba(255,200,150,0)');
+      cx.globalAlpha=1;cx.fillStyle=g;cx.fillRect(f.x-f.r,f.y-f.r,f.r*2,f.r*2);f.a-=.045*st;if(f.a<=0)FL.splice(i,1)}
+    for(i=R.length-1;i>=0;i--){r=R[i];r.t+=st;var k=Math.min(1,r.t/r.T),e=1-(1-k)*(1-k);
+      r.x=r.x0+(r.tx-r.x0)*k;r.y=r.y0+(r.ty-r.y0)*e;
+      cx.globalAlpha=1;cx.fillStyle='rgb(255,235,200)';cx.fillRect(r.x-1.2,r.y-1.2,2.4,2.4);
+      for(var q=0;q<2;q++)S.push({x:r.x,y:r.y,vx:rnd(-.35,.35),vy:rnd(.2,1.1),col:[255,170,70],age:0,life:rnd(18,34),drag:.95,g:.03,trail:false,crk:false,sz:1.2,tr:true});
+      if(k>=1){R.splice(i,1);shell(r.x,r.y)}}
+    for(i=S.length-1;i>=0;i--){p=S[i];p.age+=st;
+      if(p.age>=p.life){S.splice(i,1);continue}
+      px=p.x;py=p.y;d=Math.pow(p.drag,st);p.vx*=d;p.vy=p.vy*d+p.g*st;p.x+=p.vx*st;p.y+=p.vy*st;
+      u=p.age/p.life;hot=Math.max(0,1-u*7);al=u<.15?1:Math.max(0,1-(u-.15)/.85);al*=al;
+      if(p.crk&&u>.55)al*=Math.random()<.5?1:.15;
+      cr=Math.round(p.col[0]+(255-p.col[0])*hot);cg=Math.round(p.col[1]+(255-p.col[1])*hot);cb=Math.round(p.col[2]+(255-p.col[2])*hot);
+      if(u>.7&&!p.tr){cg=Math.round(cg*.8);cb=Math.round(cb*.6)}
+      cx.globalAlpha=al;cx.strokeStyle=cx.fillStyle='rgb('+cr+','+cg+','+cb+')';
+      if(p.trail||p.tr){cx.lineWidth=p.sz;cx.beginPath();cx.moveTo(px,py);cx.lineTo(p.x,p.y);cx.stroke()}
+      else cx.fillRect(p.x-p.sz/2,p.y-p.sz/2,p.sz,p.sz);
+    }
     cx.globalAlpha=1;
-    if(ps.length||pending>0)requestAnimationFrame(tick);
-    else{running=false;cx.clearRect(0,0,innerWidth,innerHeight)}
+    if(R.length||S.length||FL.length||pend>0)requestAnimationFrame(frame);
+    else{running=false;cx.clearRect(0,0,innerWidth,innerHeight);veil.classList.remove('on')}
   }
   function fireworks(){
-    var n=matchMedia('(prefers-reduced-motion:reduce)').matches?3:14;
-    for(var i=0;i<n;i++){pending++;setTimeout(function(){pending--;burst(innerWidth*(.12+Math.random()*.76),innerHeight*(.1+Math.random()*.45))},i*380)}
-    for(var j=0;j<14;j++)setTimeout(heart,j*120);
-    if(!running){running=true;requestAnimationFrame(tick)}
+    var n=reduceFx?3:11,i,f0;
+    veil.classList.add('on');
+    for(i=0;i<n;i++){pend++;setTimeout(function(){pend--;launch()},i*650+Math.random()*320)}
+    if(!reduceFx){f0=n*650+500;for(i=0;i<6;i++){pend++;setTimeout(function(){pend--;launch()},f0+i*170+Math.random()*90)}}
+    if(!running){running=true;lastT=performance.now();requestAnimationFrame(frame)}
   }
 
   var intro=document.getElementById('intro'),ib=document.getElementById('ib'),fill=document.getElementById('fill'),
@@ -439,7 +520,7 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
     if(document.hidden)cur.pause();else{var r=cur.play();if(r&&r.catch)r.catch(function(){})}
   });
   mb.addEventListener('click',function(){
-    muted=!muted;au.muted=muted;au2.muted=muted;
+    muted=!muted;au.muted=muted;au2.muted=muted;if(window.SFX)SFX.setMuted(muted);
     if(gn)gn.gain.value=muted?0:.85;
     mu.classList.toggle('muted',muted);mb.setAttribute('aria-pressed',String(!muted));
   });
@@ -658,18 +739,23 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
   intro.inert=true;
   var d=new Date(),w=['Chủ nhật','Thứ hai','Thứ ba','Thứ tư','Thứ năm','Thứ sáu','Thứ bảy'][d.getDay()],
       p2=function(n){return (n<10?'0':'')+n};
-  var S={},
+  var S={'31-10':'Trick or treat? Anh không cần kẹo đâu, chỉ cần em ở bên anh là đủ ngọt rồi. Happy Halloween, em bé iu.'},
       doy=Math.floor((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(d.getFullYear(),0,0))/864e5),
       key=d.getDate()+'-'+(d.getMonth()+1);
   document.getElementById('gmDate').textContent=w+' · '+p2(d.getDate())+'/'+p2(d.getMonth()+1);
   var hr=d.getHours(),night=!(hr>=6&&hr<18),reduceM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var hwH=(location.hash||'').toLowerCase(),hwM=hwH.match(/halloween-?([123])?/),
+      hwOn=hwH.indexOf('normal')<0&&(!!hwM||(d.getMonth()===9&&d.getDate()>=24)||(d.getMonth()===10&&d.getDate()<=1)),
+      hwScene=hwOn?((hwM&&+hwM[1])||(hr>=6&&hr<18?1:hr>=18&&hr<22?2:3)):0;
+  if(hwScene)night=hwScene>1;
   gm.classList.add(night?'night':'day');
+  if(hwScene)gm.classList.add('hw','hw'+hwScene);
   var per=hr>=5&&hr<6?'binhminh':hr>=6&&hr<11?'sang':hr>=11&&hr<13?'trua':hr>=13&&hr<18?'chieu':hr>=18&&hr<22?'toi':'khuya',
       TAG={binhminh:'good morning, bé iu ♡',sang:'good morning, bé iu ♡',trua:'trưa rồi, bé iu ăn cơm chưa ♡',chieu:'good afternoon, bé iu ♡',toi:'good evening, bé iu ♡',khuya:'good night, bé iu ♡'},
       HD={binhminh:'Chào ngày mới,',sang:'Chào ngày mới,',trua:'Chào buổi trưa,',chieu:'Chào buổi chiều,',toi:'Chào buổi tối,',khuya:'Khuya rồi,'};
   document.getElementById('gmTag').textContent=TAG[per];
   document.getElementById('gmH').innerHTML=HD[per]+'<span>em bé iu</span>';
-  if(night){
+  if(hwScene===1||hwScene===2){}else if(night){
     var ns=document.getElementById('nstars');
     for(var q=0;q<70;q++){var sr=document.createElement('i'),z=Math.random();
       sr.style.left=Math.random()*100+'%';sr.style.top=Math.random()*85+'%';
@@ -715,6 +801,52 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
   }
   var SETS={binhminh:['Chào ngày mới, em bé của anh. Dậy đón chào ngày mới thật là tươi sáng nào.','Trời còn tối, nhưng nghĩ về em thôi cũng đủ sưởi ấm trái tim anh.','Mong em thức dậy với nụ cười và đi ngủ với lòng bình yên.','Dù hôm nay thế nào, em bé nhớ rằng anh luôn thương em nhé.','Em chính là lý do khiến anh muốn trở thành phiên bản tốt hơn.','Anh mong mọi điều tốt đẹp sẽ tìm đến cô gái anh thương.','Nếu hôm nay mệt mỏi, em cứ yếu lòng một chút, anh vẫn ở đây.','Chưa cần gặp em, chỉ nghĩ đến em thôi anh đã thấy vui rồi.','Anh ước mình có thể ôm em thật chặt vào buổi sáng sớm này.','Chúc em một ngày bình an, còn nhớ em cứ để anh lo.','Em không cần hoàn hảo, vì trong mắt anh, em đã rất đặc biệt.','Mong những giấc mơ đẹp sẽ tiếp tục đồng hành cùng em hôm nay.','Có em trong tương lai là điều anh luôn âm thầm mong đợi.','Anh muốn trở thành người khiến em mỉm cười ngay cả những ngày buồn.','Em bé hãy nhớ chăm sóc bản thân như cách anh muốn chăm sóc em.','Mỗi ngày có em là một ngày anh thấy cuộc sống đáng yêu hơn.','Anh chẳng mong gì nhiều, chỉ mong em luôn khỏe mạnh và hạnh phúc.','Mong bình minh hôm nay mang đến cho em thật nhiều hy vọng.','Anh thương cả những điều nhỏ bé mà đôi khi em chẳng nhận ra.','Nếu thế giới khiến em mệt, hãy nhớ anh vẫn luôn đứng về phía em.','Anh muốn cùng em viết tiếp những ngày bình thường thành kỷ niệm đẹp.','Em bé à, hôm nay cũng hãy tự hào về chính mình nhé.','Anh chẳng cần ngày nào cũng rực rỡ, chỉ cần em luôn bình an.','Có em, anh tìm thấy thêm nhiều lý do để cố gắng mỗi ngày.','Anh mong trái tim em luôn được lấp đầy bằng những điều tử tế.','Dậy thôi em bé, hôm nay lại có thêm một ngày để yêu đời.','Anh muốn được nghe em kể cả những chuyện nhỏ xíu trong ngày.','Em cứ theo đuổi ước mơ, anh sẽ luôn cổ vũ em.','Nếu được ước một điều sáng nay, anh sẽ ước em luôn hạnh phúc.','Chào ngày mới, cô gái khiến trái tim anh rung động mỗi ngày.','Mong một ngày nào đó, anh vẫn được chúc em buổi sáng như thế này.'],sang:['Chào em bé xinh yêu, chúc em hôm nay gặp toàn chuyện đáng yêu.','Mỗi khi nghĩ về em, anh lại thấy bản thân có thêm nhiều sức mạnh.','Em là chiếc thông báo yêu thích nhất mà anh luôn mong chờ.','Chúc công chúa nhỏ hôm nay xinh đẹp, vui vẻ và may mắn.','Anh không cần em hoàn hảo, anh chỉ cần em luôn là chính mình.','Có em trong cuộc sống, những ngày bình thường cũng hóa thành đặc biệt.','Em bé nhớ ăn sáng nha, anh còn muốn em khỏe mạnh để yêu anh.','Anh mong nụ cười hôm nay sẽ ở lại trên môi em thật lâu.','Yêu em khiến anh hiểu rằng trưởng thành cũng có thể bắt đầu từ nhớ thương.','Em cứ tỏa sáng theo cách riêng, anh thích phiên bản chân thật nhất của em.','Anh muốn trở thành lý do khiến em tin rằng tình yêu thật sự tồn tại.','Chúc em một ngày thuận lợi, còn những chuyện buồn hãy kể anh nghe.','Anh thích cả những lúc em mè nheo, vì đó là em bé của anh.','Nếu hôm nay khó khăn, mình cứ bình tĩnh giải quyết từng chút nhé.','Anh chẳng giỏi nhất thế giới, nhưng anh thật lòng muốn yêu em thật tốt.','Em là điều ngọt ngào mà anh chẳng bao giờ muốn trở thành thói quen.','Mong hôm nay em nhận được nhiều yêu thương như cách em xứng đáng.','Anh muốn cùng em biến những ước mơ nhỏ thành kỷ niệm thật lớn.','Em bé đừng so sánh mình với ai, trong lòng anh em luôn đặc biệt.','Chỉ cần thấy em vui, anh cũng cảm thấy ngày hôm ấy đáng giá.','Anh muốn được nghe em kể chuyện linh tinh đến tận lúc cả hai buồn ngủ.','Tình yêu của anh không hoàn hảo, nhưng sự chân thành thì luôn có thật.','Mong hôm nay em đủ tự tin để làm những điều mình yêu thích.','Em không cần mạnh mẽ mọi lúc, vì em cũng xứng đáng được chở che.','Anh muốn mỗi lần mở web, em đều cảm nhận được một chút nhớ thương.','Em bé là món quà bất ngờ mà cuộc đời đã dịu dàng dành cho anh.','Anh thương em không chỉ vì em đáng yêu, mà vì em là em.','Chúc em hôm nay nhiều niềm vui hơn lo lắng, nhiều tiếng cười hơn mệt mỏi.','Sau này bận rộn đến đâu, anh vẫn muốn dành thời gian cho em.','Anh chẳng hứa cả thế giới, nhưng anh muốn cùng em xây thế giới riêng.','Chúc em ngày mới rực rỡ, còn trái tim anh thì vẫn hướng về em.'],trua:['Trưa rồi em bé, nhớ ăn no để lấy sức cho một buổi chiều làm việc dài.','Giữa ngày bận rộn, anh vẫn luôn dành một góc nhỏ để nhớ em.','Em ăn ngon miệng nha, anh gửi kèm một nghìn cái hôn qua màn hình.','Nếu sáng nay chưa vui, mong buổi trưa sẽ dịu dàng với em hơn.','Anh ước được ngồi cạnh em, ăn một bữa cơm bình thường mà hạnh phúc.','Em bé nhớ uống nước nhé, anh không ở cạnh nhưng vẫn muốn chăm em.','Anh thích hỏi em ăn gì, vì những điều nhỏ bé cũng là yêu thương.','Mệt thì nghỉ một chút nha, em không cần cố gắng đến kiệt sức.','Mong bữa trưa của em ngon miệng và buổi chiều chẳng có muộn phiền.','Anh muốn nghe cả những chuyện vụn vặt mà em nghĩ chẳng ai quan tâm.','Em chẳng cần làm gì đặc biệt để xứng đáng được anh yêu thương.','Có em để nhớ giữa ngày khiến những giờ làm việc của anh dễ chịu hơn.','Bé yêu ăn no nhé, anh còn muốn em có thật nhiều năng lượng.','Anh mong em luôn dịu dàng với chính mình như cách em dịu dàng với anh.','Nếu hôm nay mệt quá, cứ cho bản thân nghỉ ngơi mà không cần thấy có lỗi.','Anh không thể ở cạnh mỗi bữa, nhưng vẫn muốn nhắc em ăn đúng giờ.','Em bé à, hạnh phúc đôi khi chỉ là một bữa cơm ngon và một người nhớ mình.','Anh muốn cùng em chia sẻ những chuyện nhỏ, chứ chẳng chỉ những dịp đặc biệt.','Chúc em buổi trưa bình yên, mọi áp lực tạm gác lại phía sau.','Anh mong em luôn có người lắng nghe, kể cả những lúc chẳng biết nói gì.','Em bé cứ ăn ngon, còn chuyện nhớ em thì để anh tự nguyện.','Anh thương những cố gắng thầm lặng của em, dù chẳng phải ai cũng nhìn thấy.','Nghỉ một chút nha em, cuộc sống còn dài, mình không cần chạy mãi đâu.','Anh muốn tình yêu của mình hiện diện trong những quan tâm giản dị như thế.','Em xứng đáng được nghỉ ngơi, được vui vẻ và được yêu thương thật lòng.','Nếu có chuyện buồn, đừng giữ mãi trong lòng, anh muốn được nghe em kể.','Anh hy vọng mỗi ngày của em đều có một điều nhỏ khiến em mỉm cười.','Bữa trưa hôm nay có ngon không em? Anh thì thấy nhớ em hơi nhiều rồi.','Anh muốn cùng em đi qua những ngày bình thường, vì đó mới là cuộc sống.','Em bé cứ từ từ thôi, anh không muốn em đánh đổi sức khỏe lấy thành tích.','Ăn no rồi nhớ nghỉ ngơi nhé, cô gái nhỏ mà anh thương hơn lời nói.'],chieu:['Chào buổi chiều em bé, mong những mệt mỏi hôm nay nhẹ nhàng trôi qua.','Nghĩ đến em, anh lại có thêm động lực để cố gắng vì tương lai.','Em không cần giỏi nhất, chỉ cần mỗi ngày tiến thêm một chút là đáng tự hào.','Anh muốn cùng em trưởng thành, chứ chẳng muốn em phải thay đổi để vừa lòng anh.','Nếu hôm nay chưa thành công, ngày mai mình lại thử thêm lần nữa nhé.','Anh tự hào về những cố gắng mà đôi khi chính em cũng quên mất.','Em cứ theo đuổi ước mơ, anh sẽ luôn là người cổ vũ em.','Anh mong tình yêu này giúp em mạnh mẽ hơn, chứ không khiến em nhỏ bé đi.','Buổi chiều rồi, bé yêu nhớ nghỉ mắt một chút nếu đã làm việc lâu.','Anh không thể đi thay con đường của em, nhưng anh muốn đồng hành thật lâu.','Có em trong tương lai khiến anh muốn sống trách nhiệm hơn mỗi ngày.','Em bé đừng tự trách mình quá nhiều, ai cũng cần thời gian để trưởng thành.','Anh thích nhìn em tiến bộ, dù chỉ là những thay đổi nhỏ xíu.','Nếu thấy mệt, mình nghỉ một chút nhé, chẳng ai bắt em phải hoàn hảo.','Anh muốn được chứng kiến em chạm đến những ước mơ từng kể với anh.','Em xứng đáng với những điều tốt đẹp, kể cả khi hôm nay chưa như ý.','Anh mong mình luôn đủ kiên nhẫn để hiểu nhau, ngay cả khi bất đồng.','Đừng vì vài lời chê bai mà quên mất những điều tuyệt vời ở bản thân.','Anh muốn yêu em bằng hành động, để lời nói ngọt ngào chẳng chỉ là lời hứa.','Em bé à, từng bước nhỏ hôm nay có thể tạo nên tương lai em mong muốn.','Anh hy vọng sau này mình cùng nhìn lại tuổi trẻ và tự hào vì đã cố gắng.','Em không cần giấu nỗi buồn để khiến anh yên tâm, cứ là chính mình nhé.','Anh muốn cùng em giải quyết vấn đề, chứ không muốn chúng mình trở thành vấn đề của nhau.','Mỗi ngày có em, anh lại hiểu thêm một chút về sự chân thành.','Dù hôm nay tiến chậm, em vẫn đang tiến về phía trước, đừng quên điều đó.','Anh mong em luôn giữ được sự đáng yêu và những ước mơ của riêng mình.','Tình yêu đẹp nhất là khi cả hai cùng lớn lên mà vẫn chọn nhau.','Em bé không phải cạnh tranh với ai cả, hành trình của em thuộc về em.','Anh muốn trở thành người em có thể tin tưởng, kể cả khi em yếu lòng.','Nếu hôm nay đã cố hết sức, em hãy tự thưởng cho mình một nụ cười nhé.','Buổi chiều sắp qua rồi, mong em khép lại công việc với lòng thật nhẹ nhàng.'],toi:['Chào buổi tối, em bé của anh. Hôm nay em có vui không?','Nếu được ước dưới bầu trời sao, anh sẽ ước chúng mình mãi chân thành.','Anh chẳng cần một tình yêu hoàn hảo, anh chỉ cần chúng mình thật lòng.','Sau một ngày dài, anh mong em tìm thấy bình yên trong những điều giản dị.','Anh thích những buổi tối được nghe em kể chuyện, dù chẳng có gì đặc biệt.','Em bé à, hôm nay mệt rồi thì để trái tim nghỉ ngơi một chút nhé.','Anh muốn trở thành người em nghĩ đến mỗi khi cần một cái ôm.','Giữa hàng triệu người, anh vẫn thấy mình thật may mắn khi gặp em.','Anh không hứa chẳng bao giờ cãi nhau, anh hứa sẽ cố gắng hiểu em hơn.','Nếu hôm nay em buồn, anh mong mình có thể khiến em cười một chút.','Anh muốn cùng em tạo nên những kỷ niệm mà nhiều năm sau vẫn thấy ngọt ngào.','Trăng có thể khuyết, sao có thể tắt, nhưng anh vẫn muốn thương em chân thành.','Anh mong em luôn cảm thấy an toàn khi chia sẻ những điều trong lòng.','Chẳng cần ngày lễ, anh vẫn muốn nói rằng em quan trọng với anh biết bao.','Anh muốn cùng em trải qua cả những ngày bình thường lẫn những dịp đặc biệt.','Em bé không cần giấu cảm xúc, vì anh muốn hiểu cả những lúc em chẳng vui.','Anh mong tình yêu của chúng mình luôn có sự tôn trọng, tin tưởng và bao dung.','Nếu cuộc đời là hành trình dài, anh muốn chúng mình cùng nhau ngắm cảnh.','Anh thích tưởng tượng về một mái nhà nhỏ có em và những buổi tối bình yên.','Em chính là người khiến anh muốn kể về tương lai bằng hai chữ chúng mình.','Anh mong sau này bận rộn đến đâu, chúng mình vẫn dành thời gian cho nhau.','Được nghe giọng em sau một ngày dài đôi khi là hạnh phúc anh cần nhất.','Anh chẳng cần em lúc nào cũng vui, anh chỉ mong em luôn được là mình.','Nếu có hiểu lầm, anh mong chúng mình chọn trò chuyện thay vì im lặng rời xa.','Anh muốn tình yêu này là nơi cả hai được nghỉ ngơi sau những bộn bề.','Em bé à, cảm ơn em đã xuất hiện và khiến những ngày của anh thêm ý nghĩa.','Anh mong những điều tốt đẹp sẽ đến với em, dù anh có ở cạnh hay không.','Anh không yêu em vì em hoàn hảo, anh yêu cả những điều khiến em khác biệt.','Sau này tóc bạc, anh vẫn muốn nghe em kể những câu chuyện chẳng đầu chẳng cuối.','Anh muốn cùng em đi qua năm tháng, không chỉ cùng nhau đi qua những ngày vui.','Chúc em buổi tối an lành, và nhớ rằng có một người thương em rất nhiều.'],khuya:['Khuya rồi em bé, gác điện thoại xuống và ngủ ngon nhé, anh thương em.','Ước gì lúc này anh có thể ôm em vào lòng và chúc em ngủ ngon.','Nhắm mắt nhé em, mong mọi muộn phiền hôm nay tan vào giấc mơ đẹp.','Nếu hôm nay chưa vui, ngày mai mình lại bắt đầu bằng một nụ cười nhé.','Anh mong em ngủ thật ngon, để ngày mai thức dậy với trái tim nhẹ nhàng.','Dù đêm nay chúng mình cách xa, anh vẫn gửi em một cái ôm thật ấm.','Em bé ngủ ngoan nha, trong giấc mơ nhớ chừa cho anh một chỗ.','Anh chẳng thể canh giấc ngủ em, chỉ có thể âm thầm mong em bình an.','Đừng thức khuya suy nghĩ quá nhiều nhé, em bé xứng đáng được nghỉ ngơi.','Nếu đêm nay thấy cô đơn, hãy nhớ rằng em luôn có người thương mình.','Anh mong giấc mơ sẽ dịu dàng với em hơn những điều khiến em lo lắng.','Khuya rồi, mọi chuyện để ngày mai nhé, giờ em chỉ cần ngủ thật ngon.','Anh muốn là người em nhớ đến với cảm giác ấm áp, chứ chẳng phải muộn phiền.','Ngủ ngon nhé công chúa, ngày mai anh lại tiếp tục thương em nhiều hơn.','Anh ước có thể hôn nhẹ lên trán em rồi kéo chăn cho em ngủ.','Dù hôm nay thế nào, em vẫn xứng đáng được yêu thương và nghỉ ngơi thật tốt.','Mong đêm nay ôm lấy em bằng sự bình yên mà anh luôn muốn dành tặng.','Anh không mong em mơ thấy điều gì lớn lao, chỉ mong em ngủ thật an lành.','Em bé à, đừng mang nỗi buồn đi ngủ một mình, anh luôn sẵn lòng lắng nghe.','Có lẽ điều ngọt ngào nhất là biết rằng ngày mai mình vẫn còn nhau.','Anh muốn mỗi đêm đều được nhắc em rằng em quan trọng với anh biết bao.','Ngủ ngoan nha bé, anh gửi hết nhớ thương vào ánh trăng đêm nay.','Nếu giấc mơ có thể chọn người đồng hành, anh mong mình vẫn tìm thấy nhau.','Anh mong ngày mai thức dậy, em vẫn thấy cuộc sống có nhiều điều đáng yêu.','Đừng lo về ngày mai quá nhiều, em bé cứ để bản thân nghỉ ngơi trước nhé.','Anh thương cả những lúc em yếu lòng, nên chẳng cần phải cố tỏ ra ổn.','Trước khi ngủ, nhớ rằng em đã cố gắng rất nhiều và anh tự hào về em.','Ước gì khoảng cách biến mất, để lời chúc ngủ ngon trở thành một cái ôm.','Nếu được chọn lại, anh vẫn muốn gặp em và bắt đầu hành trình này.','Mong giấc ngủ mang đến bình yên, còn ngày mai mang đến những điều em mong.','Ngủ ngon em bé của anh, mong mỗi bình minh chúng mình vẫn chọn yêu nhau.']},pool=SETS[per];
   document.getElementById('gmMsg').textContent=S[key]||pool[doy%pool.length];
+  if(hwScene){
+    document.getElementById('gmTag').textContent='happy halloween, bé iu ♡';
+    var ghw=document.createElement('div');ghw.className='ghw';document.querySelector('#gm .gdeco').appendChild(ghw);
+    var put=function(cls,css,html){var e=document.createElement('div');e.className='hwo '+cls;e.style.cssText=css;e.innerHTML=html||'';ghw.appendChild(e);return e},
+        rr=function(a,b){return a+Math.random()*(b-a)},
+        HP='M0 -2C-3 -10-13 -6-13 1C-13 8-3 12 0 16C3 12 13 8 13 1C13 -6 3 -10 0 -2Z',
+        ghostSVG=function(w){return '<svg viewBox="0 0 64 80" width="'+w+'"><path d="M10 74V40C10 20 20 8 32 8s22 12 22 32v34l-7-6-7 6-8-6-8 6-7-6z" fill="#fff"/><ellipse cx="24" cy="38" rx="3" ry="4.2" fill="#3b2150"/><ellipse cx="40" cy="38" rx="3" ry="4.2" fill="#3b2150"/><circle cx="18" cy="47" r="4.2" fill="#ff9fc0" opacity=".75"/><circle cx="46" cy="47" r="4.2" fill="#ff9fc0" opacity=".75"/><ellipse cx="32" cy="48" rx="2.6" ry="3.2" fill="#3b2150"/></svg>'},
+        pumpkinSVG=function(w){return '<svg viewBox="0 0 100 92" width="'+w+'"><defs><radialGradient id="hpg" cx=".5" cy=".42" r=".65"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#e8590c"/></radialGradient></defs><ellipse cx="28" cy="56" rx="25" ry="33" fill="url(#hpg)"/><ellipse cx="72" cy="56" rx="25" ry="33" fill="url(#hpg)"/><ellipse cx="50" cy="54" rx="30" ry="37" fill="url(#hpg)"/><path d="M40 22c-9 12-9 50 0 62M60 22c9 12 9 50 0 62" stroke="#c94a08" stroke-width="2" fill="none" opacity=".45"/><path d="M45 18c0-7 4-12 10-13l1 5c-3 1-4 4-4 8z" fill="#5b7f2a"/><g class="pkf"><g transform="translate(34 50) scale(.78)"><path d="'+HP+'" fill="#ffe27a"/></g><g transform="translate(66 50) scale(.78)"><path d="'+HP+'" fill="#ffe27a"/></g><path d="M32 66q18 15 36 0q-5 11-18 12t-18-12z" fill="#ffe27a"/></g></svg>'},
+        batSVG=function(w,c){return '<svg viewBox="0 0 60 30" width="'+w+'"><g class="bw"><path d="M30 14L19 4L11 8L4 5L8 16L14 14L18 21L25 17Z" fill="'+c+'"/><path d="M30 14L41 4L49 8L56 5L52 16L46 14L42 21L35 17Z" fill="'+c+'"/></g><ellipse cx="30" cy="16" rx="4" ry="7" fill="'+c+'"/><circle cx="30" cy="9" r="4.2" fill="'+c+'"/><path d="M26.500 7L27 1.500L30 5.500L33 1.500L33.500 7Z" fill="'+c+'"/></svg>'},
+        heartLoop=function(box,css,cls){var s='<span class="hwh '+(cls||'')+'" style="'+css+'">♥</span>';return s};
+    var i,e;
+    // trái tim bay lên (chung cho cả 3 nền)
+    for(i=0;i<7;i++)put('hwr','left:'+rr(4,94)+'%;bottom:-24px;color:'+(hwScene===1?'#ff7aa8':'#ffa0c8')+';font-size:'+rr(12,22).toFixed(0)+'px;animation-duration:'+rr(9,16).toFixed(1)+'s;animation-delay:'+(-rr(0,14)).toFixed(1)+'s','♥');
+    if(hwScene===1){
+      put('hwsun','left:50%;bottom:-20vh;width:min(120vw,560px);aspect-ratio:1;translate:-50% 0;border-radius:50%;background:radial-gradient(circle,#fff0b8 0%,#ffcf7a 30%,rgba(255,170,120,.5) 52%,rgba(255,160,150,0) 70%)');
+      put('hwg1','left:-10%;right:-10%;bottom:-3%;height:19%;background:linear-gradient(#a8552d,#5e2c1c);border-radius:50% 50% 0 0/100% 100% 0 0');
+      [[3,.8],[16,.6],[35,1.1],[57,.75],[75,1.05],[92,.65]].forEach(function(s,k){var w=Math.round(Math.min(innerWidth*.22,112)*s[1]);
+        put('hwpk','left:'+s[0]+'%;bottom:'+(k%2?2:-3)+'%;margin-left:'+(-w/2)+'px;animation-delay:'+(-k*.7)+'s',pumpkinSVG(w))});
+      [[10,22,54],[82,30,44],[58,12,38]].forEach(function(s,k){put('hwgh','left:'+s[0]+'%;top:'+s[1]+'%;animation-delay:'+(-k*1.3)+'s;animation-duration:'+(3.6+k*.6)+'s',ghostSVG(s[2]))});
+      var form=put('hwform','top:5%;left:0');
+      for(i=0;i<13;i++){var t=i/13*6.2832,hx=16*Math.pow(Math.sin(t),3),hy=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
+        var b=document.createElement('div');b.className='hwb';b.style.cssText='left:'+(hx*3.6+60)+'px;top:'+(hy*3.2+52)+'px;animation-delay:'+(-i*.05)+'s';b.innerHTML=batSVG(20,'#3a1d52');form.appendChild(b)}
+      if(!reduceM)for(i=0;i<9;i++)(function(){
+        var l=document.createElement('div');l.className='hwl';l.style.left=rr(0,100)+'%';l.style.setProperty('--dx',rr(-70,70)+'px');l.style.setProperty('--rot',rr(240,720)+'deg');
+        l.style.animationDuration=rr(9,15).toFixed(1)+'s';l.style.animationDelay=(-rr(0,14)).toFixed(1)+'s';
+        var c=['#ff8a3d','#e5532d','#ffc43d','#d9822b'][Math.floor(Math.random()*4)];
+        l.innerHTML='<i style="width:'+rr(11,17).toFixed(0)+'px;height:'+rr(11,17).toFixed(0)+'px;background:'+c+'"></i>';ghw.appendChild(l)})();
+    }
+    if(hwScene===2){
+      put('hwmoon','left:50%;bottom:7%;width:min(74vw,360px);aspect-ratio:1;translate:-50% 0;border-radius:50%;background:radial-gradient(circle at 40% 38%,#ffe0a8,#ff9a4d 55%,#ff6a3d);box-shadow:0 0 80px 30px rgba(255,140,80,.45)');
+      put('hwg2','left:-10%;right:-10%;bottom:-4%;height:20%;background:#150a2b;border-radius:50% 50% 0 0/100% 100% 0 0');
+      put('hwhouse','left:-2%;bottom:6%','<svg viewBox="0 0 200 150" width="'+Math.round(Math.min(innerWidth*.5,250))+'"><g fill="#14082b"><path d="M14 150V74L84 24L154 74V150Z"/><rect x="152" y="52" width="30" height="98"/><path d="M146 54L167 16L188 54Z"/><rect x="40" y="38" width="10" height="26"/></g><g fill="#ffd27a"><rect x="38" y="94" width="16" height="22" rx="2"/><rect x="72" y="94" width="16" height="22" rx="2"/><rect x="106" y="94" width="16" height="22" rx="2"/><rect x="160" y="70" width="14" height="20" rx="2"/><g transform="translate(84 58) scale(.9)"><path d="'+HP+'"/></g></g><path d="M126 150V132q8-12 16 0V150Z" fill="#05020f"/></svg>');
+      var tr=put('hwtree','right:-2%;bottom:6%','<svg viewBox="0 0 150 210" width="'+Math.round(Math.min(innerWidth*.4,190))+'"><path d="M76 210C74 160 72 128 64 96C58 74 44 62 22 58M70 120C88 104 108 98 134 86M68 140C54 130 38 128 14 130M72 94C74 70 86 48 104 30" stroke="#14082b" stroke-width="8" fill="none" stroke-linecap="round"/><g class="lan" style="--d:0s"><line x1="28" y1="60" x2="28" y2="84" stroke="#14082b" stroke-width="2"/><g transform="translate(28 96) scale(.95)"><path d="'+HP+'" fill="#ff7fb5"/></g></g><g class="lan" style="--d:-.8s"><line x1="118" y1="82" x2="118" y2="106" stroke="#14082b" stroke-width="2"/><g transform="translate(118 118) scale(1)"><path d="'+HP+'" fill="#ffb066"/></g></g><g class="lan" style="--d:-1.5s"><line x1="100" y1="36" x2="100" y2="58" stroke="#14082b" stroke-width="2"/><g transform="translate(100 70) scale(.8)"><path d="'+HP+'" fill="#ff7fb5"/></g></g></svg>');
+      [[44,.7],[64,.5]].forEach(function(s,k){var w=Math.round(Math.min(innerWidth*.18,90)*s[1]);put('hwpk','left:'+s[0]+'%;bottom:0;margin-left:'+(-w/2)+'px;animation-delay:'+(-k)+'s',pumpkinSVG(w))});
+      for(i=0;i<4;i++)put('hwfly','top:'+rr(8,30).toFixed(0)+'%;left:-12%;animation-duration:'+rr(13,22).toFixed(0)+'s;animation-delay:'+(-rr(0,18)).toFixed(0)+'s',batSVG(rr(26,38).toFixed(0),'#12072a'));
+    }
+    if(hwScene===3){
+      put('hwg3','left:-10%;right:-10%;bottom:-4%;height:16%;background:#070416;border-radius:50% 50% 0 0/100% 100% 0 0');
+      put('hwcat','right:5%;bottom:6%','<svg viewBox="0 0 70 100" width="'+Math.round(Math.min(innerWidth*.2,86))+'"><g fill="#0a0518"><rect x="0" y="82" width="70" height="6"/><rect x="6" y="70" width="8" height="30"/><rect x="56" y="70" width="8" height="30"/><ellipse cx="34" cy="62" rx="15" ry="22"/><circle cx="34" cy="30" r="12"/><path d="M23 24L24 8L33 20ZM45 24L44 8L35 20Z"/><path d="M48 76C64 76 66 56 58 50" stroke="#0a0518" stroke-width="6" fill="none" stroke-linecap="round"/></g><g class="ce" fill="#ffd84d"><ellipse cx="29" cy="29" rx="2.4" ry="3.6"/><ellipse cx="39" cy="29" rx="2.4" ry="3.6"/></g></svg>');
+      var cp=put('hwcp','left:7%;bottom:12%');
+      cp.innerHTML='<span class="hwcph">♥</span><div class="hwcpa">'+ghostSVG(52)+'</div><div class="hwcpb">'+ghostSVG(44)+'</div>';
+      put('hwwitch','top:13%;left:-30%;animation-duration:17s','<svg viewBox="0 0 130 70" width="'+Math.round(Math.min(innerWidth*.3,130))+'"><g fill="#0b0620" stroke="#8a6cff" stroke-width=".9"><path d="M8 54L120 38" stroke-width="3.2"/><path d="M12 54L-2 44L-4 54L-2 64Z"/><path d="M62 46L72 22L88 24L94 44Z"/><circle cx="80" cy="16" r="7"/><path d="M70 14L82 -6L92 14Z"/><ellipse cx="81" cy="14" rx="15" ry="3"/><path d="M72 20C62 22 56 30 50 38"/></g></svg>');
+      for(i=0;i<8;i++)put('hwff','left:'+rr(3,96).toFixed(0)+'%;bottom:'+rr(6,32).toFixed(0)+'%;--dx:'+rr(-30,30).toFixed(0)+'px;--dy:'+rr(-40,10).toFixed(0)+'px;animation-duration:'+rr(3,6).toFixed(1)+'s;animation-delay:'+(-rr(0,5)).toFixed(1)+'s');
+    }
+    if(hwScene===2)for(i=0;i<12;i++)put('hwff','left:'+rr(3,96).toFixed(0)+'%;bottom:'+rr(6,36).toFixed(0)+'%;--dx:'+rr(-30,30).toFixed(0)+'px;--dy:'+rr(-40,10).toFixed(0)+'px;animation-duration:'+rr(3,6).toFixed(1)+'s;animation-delay:'+(-rr(0,5)).toFixed(1)+'s');
+  }
   var START=new Date(2026,1,8,0,0,0),clk=document.getElementById('gmClock'),cnt=document.getElementById('gmCount');
   function tick(){
     var n=new Date(),df=Math.max(0,n-START),dd=Math.floor(df/864e5),rr=df%864e5;
@@ -768,8 +900,8 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
     if(!text){say('Em viết gì đó cho anh nhé',false);ta.focus();return}
     try{var last=+localStorage.getItem('fts')||0;if(Date.now()-last<15000){say('Đợi một chút rồi gửi tiếp nha',false);return}}catch(e){}
     busy=true;sendBtn.disabled=true;say('Đang gửi...',true);
-    function done(){busy=false;sendBtn.disabled=false;say('Đã gửi cho anh rồi nha',true);try{localStorage.setItem('fts',String(Date.now()))}catch(e){}ta.value='';upd();setTimeout(function(){if(fm.classList.contains('show'))close()},2600)}
-    function fail(){busy=false;sendBtn.disabled=false;say('Gửi chưa được, em thử lại nha',false)}
+    function done(){busy=false;sendBtn.disabled=false;say('Đã gửi cho anh rồi nha',true);if(window.SFX)SFX.play('ok');try{localStorage.setItem('fts',String(Date.now()))}catch(e){}ta.value='';upd();setTimeout(function(){if(fm.classList.contains('show'))close()},2600)}
+    function fail(){busy=false;sendBtn.disabled=false;say('Gửi chưa được, em thử lại nha',false);if(window.SFX)SFX.play('bad')}
     var ctl=window.AbortController?new AbortController():null,tm=setTimeout(function(){if(ctl)ctl.abort()},15000),
         when='';
     try{when=new Date().toLocaleString('vi-VN',{timeZone:'Asia/Ho_Chi_Minh'})}catch(e){when=new Date().toISOString()}
@@ -779,6 +911,78 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
       .then(function(r){clearTimeout(tm);return r.json().catch(function(){return {}}).then(function(j){if(r.ok&&String(j.success)!=='false')done();else fail()})},
             function(){clearTimeout(tm);fail()});
   });
+})();
+</script>
+<script>
+/* Hiệu ứng âm thanh tự tổng hợp bằng Web Audio (không dùng file âm thanh) */
+(function(){
+  function make(ctx,dest){
+    var len=ctx.sampleRate*2,nb=ctx.createBuffer(1,len,ctx.sampleRate),nd=nb.getChannelData(0),i;
+    for(i=0;i<len;i++)nd[i]=Math.random()*2-1;
+    function T(){return ctx.currentTime}
+    function out(pan){
+      if(ctx.createStereoPanner&&pan!=null){var p=ctx.createStereoPanner();p.pan.value=Math.max(-1,Math.min(1,pan));p.connect(dest);return p}
+      return dest;
+    }
+    function tone(f0,dur,type,gain,when,f1,pan){
+      var t=T()+(when||0),o=ctx.createOscillator(),g=ctx.createGain();
+      o.type=type||'sine';o.frequency.setValueAtTime(f0,t);
+      if(f1)o.frequency.exponentialRampToValueAtTime(f1,t+dur);
+      g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(gain,t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+      o.connect(g);g.connect(out(pan));o.start(t);o.stop(t+dur+.05);
+    }
+    function noise(dur,ftype,f0,f1,gain,when,q,pan,att){
+      var t=T()+(when||0),s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain(),a=att||.004;
+      s.buffer=nb;f.type=ftype;f.frequency.setValueAtTime(f0,t);if(f1)f.frequency.exponentialRampToValueAtTime(f1,t+dur);if(q)f.Q.value=q;
+      g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(gain,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+      s.connect(f);f.connect(g);g.connect(out(pan));s.start(t,Math.random()*1.2);s.stop(t+dur+.05);
+    }
+    return {
+      tick:function(){tone(660,.07,'sine',.12);tone(990,.06,'triangle',.05,.012)},
+      soft:function(){tone(440,.08,'sine',.09)},
+      chime:function(){tone(880,.55,'sine',.13);tone(1318,.6,'sine',.09,.08);tone(1760,.7,'sine',.05,.17);noise(.25,'highpass',6000,null,.02,.02)},
+      bloop:function(){tone(320,.13,'sine',.14,0,760)},
+      ok:function(){[1047,1319,1568,2093].forEach(function(f,k){tone(f,.35,'sine',.1,k*.11)})},
+      bad:function(){tone(240,.2,'triangle',.12,0,150)},
+      launch:function(pan,dur){noise(dur,'bandpass',500,2600,.07,0,5,pan,.05);tone(800,dur*.9,'sine',.018,0,2400,pan)},
+      boom:function(pan,delay,size){
+        var s=size||1,d=delay||0;
+        noise(.05,'highpass',1800,null,.45*s,d,null,pan,.002);
+        tone(130,.7,'sine',.85*s,d,36,pan);
+        noise(1.1,'lowpass',2200,140,.6*s,d,null,pan,.006);
+        noise(.45,'bandpass',600,300,.3*s,d,.8,pan,.004);
+      },
+      crackle:function(pan,delay){
+        var k,n=26,w;
+        for(k=0;k<n;k++){w=(delay||0)+.12+Math.random()*1.2;noise(.012,'highpass',2500+Math.random()*2500,null,.09*(1-k/n*.6),w,null,pan,.001)}
+      }
+    };
+  }
+  var AC=window.AudioContext||window.webkitAudioContext,ctx=null,master=null,api=null,muted=false;
+  function init(){
+    if(ctx||!AC)return;
+    try{ctx=new AC()}catch(e){return}
+    var comp=ctx.createDynamicsCompressor();comp.threshold.value=-18;comp.ratio.value=6;comp.attack.value=.003;comp.release.value=.25;
+    master=ctx.createGain();master.gain.value=muted?0:.8;master.connect(comp);comp.connect(ctx.destination);
+    api=make(ctx,master);
+  }
+  function wake(){init();if(ctx&&ctx.state==='suspended')ctx.resume()}
+  function call(n,a,b,c){wake();if(api&&!muted)try{api[n](a,b,c)}catch(e){}}
+  window.SFX={
+    wake:wake,
+    play:function(n){wake();if(api&&!muted&&api[n])try{api[n]()}catch(e){}},
+    launch:function(p,d){call('launch',p*2-1,d)},
+    boom:function(p,d,s){call('boom',p*2-1,d,s)},
+    crackle:function(p,d){call('crackle',p*2-1,d)},
+    setMuted:function(m){muted=!!m;if(master)master.gain.value=muted?0:.8}
+  };
+  window.__mkSfx=make;
+  var MAP={gmBtn:'chime',go:'chime',yes:'chime',ok:'chime',fSend:'tick',fbtn:'tick',fClose:'soft',home:'soft',mb:'tick'};
+  document.addEventListener('click',function(e){
+    var b=e.target&&e.target.closest?e.target.closest('button'):null;
+    if(!b||b.id==='no')return;
+    window.SFX.play(MAP[b.id]||'tick');
+  },true);
 })();
 </script>
 </body>
