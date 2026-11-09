@@ -1217,8 +1217,8 @@ window.ALBUM_ENDPOINT='https://script.google.com/macros/s/AKfycbxH4wKrX7zFfudBAk
     ctx.lineTo(W,H);ctx.closePath();ctx.fill();
   }
   function ball(x,y,r){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.stroke()}
-  function drawSnowman(fx,female){
-    var cx=W*fx,col=Math.min(pile.length-1,Math.floor(cx/BW)),h=pile[col];
+  function drawSnowman(dx,female){
+    var cx=W*0.82+dx,col=Math.min(pile.length-1,Math.floor(cx/BW)),h=pile[col];
     var p=Math.min(1,h/50);
     if(p<0.15)return;
     var s=0.35+0.65*p,base=H-h+3;
@@ -1283,8 +1283,8 @@ window.ALBUM_ENDPOINT='https://script.google.com/macros/s/AKfycbxH4wKrX7zFfudBAk
       ctx.fill();
     }
     drawPile();
-    drawSnowman(0.18,true);
-    drawSnowman(0.82,false);
+    drawSnowman(-27,true);
+    drawSnowman(27,false);
     requestAnimationFrame(draw);
   }
   size();
