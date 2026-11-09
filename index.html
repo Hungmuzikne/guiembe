@@ -18,8 +18,8 @@
 html,body{height:100%;margin:0}
 body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:radial-gradient(ellipse at 50% 40%,rgba(230,244,255,.55) 0%,rgba(170,205,235,.25) 35%,rgba(0,0,0,0) 70%),linear-gradient(170deg,#1c3558 0%,#3d6a95 45%,#8fb9de 80%,#d6ebfa 100%);overflow:hidden;color:var(--ink)}
 main{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px;text-align:center}
-h1{font:600 clamp(1.3rem,5.2vw,2.3rem)/1.3 "Dancing Script",cursive,serif;margin:0;max-width:600px;color:var(--pink);text-shadow:0 2px 12px #fff8}
-#sub{margin:0;max-width:560px;font-size:clamp(.95rem,3.6vw,1.1rem);line-height:1.55;color:var(--ink)}
+h1{font:600 clamp(1.3rem,5.2vw,2.3rem)/1.3 "Dancing Script",cursive,serif;margin:0;max-width:600px;color:#ffffff;text-shadow:0 2px 4px rgba(10,30,60,.6),0 0 18px rgba(10,30,60,.45)}
+#sub{margin:0;max-width:560px;font-size:clamp(.95rem,3.6vw,1.1rem);line-height:1.55;color:#ffffff;text-shadow:0 1px 3px rgba(10,30,60,.7),0 0 12px rgba(10,30,60,.4)}
 @media (max-height:720px){.dog{width:140px!important}.row{min-height:90px}}
 .dog{width:150px;height:auto;filter:drop-shadow(0 6px 10px #0002)}
 .dog .paws,.dog .yes{opacity:0;transition:opacity .2s}
@@ -29,7 +29,7 @@ h1{font:600 clamp(1.3rem,5.2vw,2.3rem)/1.3 "Dancing Script",cursive,serif;margin
 @keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
 .dog .ears{animation:ear 2.4s ease-in-out infinite alternate;transform-origin:60px 40px}
 @keyframes ear{to{transform:rotate(3deg)}}
-.name{font:700 1.1rem system-ui,sans-serif;letter-spacing:.12em;color:var(--ink);margin-top:-6px}
+.name{font:700 1.1rem system-ui,sans-serif;letter-spacing:.12em;color:#ffffff;margin-top:-6px;text-shadow:0 1px 3px rgba(10,30,60,.7)}
 .hug{width:250px;max-width:100%;height:auto;animation:sq 1.4s .9s ease-in-out infinite alternate}
 .hug .a{animation:ha .9s cubic-bezier(.3,1.4,.5,1) both}
 .hug .b{animation:hb .9s cubic-bezier(.3,1.4,.5,1) both}
@@ -157,7 +157,7 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
 @keyframes fh{to{transform:scale(1.18)}}
 @media (prefers-reduced-motion:reduce){.fr i{animation:none}}
 .card .hug{mix-blend-mode:multiply}
-#ask{font:600 clamp(1.25rem,5.2vw,1.6rem) "Dancing Script",cursive,serif;color:var(--pink);margin:2px 0 0;opacity:0;transition:opacity 1s}
+#ask{font:600 clamp(1.25rem,5.2vw,1.6rem) "Dancing Script",cursive,serif;color:#ffffff;text-shadow:0 2px 4px rgba(10,30,60,.6);margin:2px 0 0;opacity:0;transition:opacity 1s}
 #ask.on{opacity:1}
 .mem{display:none;justify-content:center;align-items:center;height:min(210px,30vh);margin:0 auto}
 .mem.show{display:flex}
@@ -418,7 +418,9 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
     document.body.appendChild(h);
     setTimeout(function(){h.remove()},12500);
   }
-  setInterval(function(){if(!document.hidden&&document.querySelectorAll('.heart').length<14)heart()},650);
+  
+  setInterval(function(){if(!document.hidden&&document.querySelectorAll('.heart').length<30)heart()},300);
+  for(var i=0;i<12;i++)setTimeout(heart,i*120);
   function petal(){
     var p=document.createElement('div'),i=document.createElement('i'),s=10+Math.random()*10,
         cols=['#e6f4ff','#9fd6f7','#cfe8ff','#f2f9ff'],c=cols[Math.floor(Math.random()*cols.length)];
@@ -430,8 +432,7 @@ main>:first-child{margin-top:auto}main>:last-child{margin-bottom:auto}
     p.appendChild(i);document.body.appendChild(p);
     setTimeout(function(){p.remove()},17000);
   }
-  if(!matchMedia('(prefers-reduced-motion:reduce)').matches)setInterval(function(){if(!document.hidden&&!document.body.classList.contains('ld')&&document.querySelectorAll('.pt').length<16)petal()},900);
-  for(var i=0;i<6;i++)setTimeout(heart,i*150);
+  
 
   function dodge(e){
     if(e&&e.cancelable)e.preventDefault();
@@ -1174,6 +1175,112 @@ window.ALBUM_ENDPOINT='https://script.google.com/macros/s/AKfycbxH4wKrX7zFfudBAk
     },function(){resetDel();say('Mất kết nối rồi, thử lại nha')});
   });
   document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;if(lb.classList.contains('show'))closePhoto();else if(al.classList.contains('show'))close()});
+})();
+</script>
+<canvas id="snow" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none"></canvas>
+<div id="wx" style="position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:12px;z-index:35;display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.95);color:#1b3a5c;font:700 14px system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;box-shadow:0 3px 14px rgba(10,30,60,.25);max-width:calc(100vw - 90px)">
+  <span aria-hidden="true">❄</span><span id="wxText" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Đang lấy nhiệt độ...</span>
+</div>
+<script>
+(function(){
+  /* Hiệu ứng tuyết: nhiều lớp độ sâu, gió nhẹ đổi theo thời gian, hạt xa thì mờ và chậm hơn */
+  var c=document.getElementById('snow'),ctx=c.getContext('2d'),W=0,H=0,dpr=1,flakes=[],last=0,t=0;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function make(anywhere){
+    var d=Math.random();
+    return {
+      x:Math.random()*W,
+      y:anywhere?Math.random()*H:-Math.random()*H*0.2,
+      r:0.4+d*1.9,
+      d:d,
+      vy:150+d*230,
+      phase:Math.random()*Math.PI*2,
+      sway:0.4+Math.random()*0.8,
+      amp:4+Math.random()*10,
+      a:0.35+d*0.55
+    };
+  }
+  function size(){
+    dpr=Math.min(window.devicePixelRatio||1,2);W=window.innerWidth;H=window.innerHeight;
+    c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.min(1100,Math.round(W*H/1600));
+    flakes=[];for(var i=0;i<n;i++)flakes.push(make(true));
+  }
+  function draw(now){
+    if(!last)last=now;
+    var dt=Math.min((now-last)/1000,0.05);last=now;t+=dt;
+    var wind=45*Math.sin(t*0.15)+20*Math.sin(t*0.41+1.3);
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<flakes.length;i++){
+      var f=flakes[i];
+      f.phase+=f.sway*dt;
+      f.x+=(Math.sin(f.phase)*f.amp+wind*(0.3+f.d))*dt;
+      f.y+=f.vy*dt;
+      if(f.y>H+10||f.x<-20||f.x>W+20){
+        var nf=make(false);nf.x=Math.random()*W;flakes[i]=nf;f=nf;
+      }
+      ctx.beginPath();
+      ctx.fillStyle='rgba(255,255,255,'+f.a.toFixed(3)+')';
+      ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  size();
+  window.addEventListener('resize',size);
+  if(!reduce)requestAnimationFrame(draw);
+
+  /* Nhiệt độ theo vị trí thật của người xem (Open-Meteo) + tên địa điểm (bản đồ) */
+  var GMAPS_KEY='';   /* Dán Google Maps API key vào đây nếu muốn tên địa điểm chi tiết hơn (vd: cổng bến xe). Để trống sẽ dùng OpenStreetMap. */
+  var el=document.getElementById('wxText'),coords=null,label='';
+  function fmtTime(d){return d.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})}
+  function load(){
+    if(!coords)return;
+    var url='https://api.open-meteo.com/v1/forecast?latitude='+coords.lat+'&longitude='+coords.lon+'&current=temperature_2m&timezone=auto';
+    fetch(url).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})
+      .then(function(d){
+        var now=new Date();
+        el.textContent=Math.round(d.current.temperature_2m)+'°C · '+label+' · '+fmtTime(now);
+        el.parentNode.title='Cập nhật lúc '+fmtTime(now);
+      })
+      .catch(function(err){console.error('[Thời tiết]',err);el.textContent='Không lấy được nhiệt độ'});
+  }
+  function nominatim(lat,lon,cb){
+    fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=18&addressdetails=1&accept-language=vi&lat='+lat+'&lon='+lon)
+      .then(function(r){return r.json()})
+      .then(function(d){
+        var a=d.address||{};
+        var name=d.name||a.amenity||a.building||a.shop||a.road||a.suburb||a.city||'';
+        var road=(a.road&&a.road!==name)?a.road:(a.suburb||a.city_district||'');
+        cb([name,road].filter(Boolean).join(', ')||'Vị trí của bạn');
+      })
+      .catch(function(){cb('Vị trí của bạn')});
+  }
+  function placeName(lat,lon,cb){
+    if(!GMAPS_KEY){nominatim(lat,lon,cb);return}
+    fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lon+'&language=vi&key='+encodeURIComponent(GMAPS_KEY))
+      .then(function(r){return r.json()})
+      .then(function(d){
+        var r0=d.results&&d.results[0];
+        if(!r0)throw new Error(d.status||'no result');
+        cb(r0.formatted_address.split(',').slice(0,2).map(function(x){return x.trim()}).join(', '));
+      })
+      .catch(function(err){console.error('[Google Maps]',err);nominatim(lat,lon,cb)});
+  }
+  function locate(lat,lon,name){
+    coords={lat:lat.toFixed(5),lon:lon.toFixed(5)};
+    label=name;load();
+  }
+  function useHanoi(){locate(21.0285,105.8542,'Hà Nội')}
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(p){
+      var lat=p.coords.latitude,lon=p.coords.longitude;
+      coords={lat:lat.toFixed(5),lon:lon.toFixed(5)};load();
+      placeName(lat,lon,function(name){label=name;load()});
+    },function(){useHanoi()},{enableHighAccuracy:true,timeout:10000,maximumAge:60000});
+  }else{useHanoi()}
+  setInterval(load,10*60*1000);
 })();
 </script>
 </body>
